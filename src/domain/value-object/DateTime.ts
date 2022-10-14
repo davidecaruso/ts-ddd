@@ -2,19 +2,19 @@ import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { ValueObject } from './ValueObject'
+import { ValueObject } from './index'
 
 export abstract class DateTime extends ValueObject {
   private readonly _value: Date
-
-  get value() {
-    return this._value
-  }
 
   constructor(input: string | Date | DateTime = new Date()) {
     super()
     this._value =
       input instanceof DateTime ? new Date(input.toString()) : input instanceof Date ? input : new Date(input)
+  }
+
+  get value() {
+    return this._value
   }
 
   equals(that: DateTime): boolean {

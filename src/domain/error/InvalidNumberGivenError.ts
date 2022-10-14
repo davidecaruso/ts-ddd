@@ -1,3 +1,3 @@
-import { DomainError } from './DomainError'
+import { DomainError } from './index'
 
 export class InvalidNumberGivenError extends DomainError {}
