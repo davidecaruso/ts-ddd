@@ -1,4 +1,7 @@
-import { DateTime, DateTimeFromCtorC } from './DateTime'
+import { CreatedAt } from './date-time/CreatedAt'
+import { DateTime, DateTimeFromCtorC } from './date-time/DateTime'
+import { DeletedAt } from './date-time/DeletedAt'
+import { UpdatedAt } from './date-time/UpdatedAt'
 import { Id, IdC } from './id/Id'
 import { IntegerId, IntegerIdC } from './id/IntegerId'
 import { ObjectId, ObjectIdC } from './id/ObjectId'
@@ -15,9 +18,11 @@ import { ValueObject } from './ValueObject'
 
 export {
   AbstractNumber,
+  CreatedAt,
   Decimal,
   DecimalC,
   DateTime,
+  DeletedAt,
   DateTimeFromCtorC,
   Id,
   IdC,
@@ -35,6 +40,7 @@ export {
   UnsignedInteger,
   UnsignedIntegerC,
   UnsignedNumber,
+  UpdatedAt,
   Uuid,
   UuidC,
   ValueObject,

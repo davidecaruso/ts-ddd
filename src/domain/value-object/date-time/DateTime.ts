@@ -2,7 +2,7 @@ import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { ValueObject } from './index'
+import { ValueObject } from '../index'
 
 export abstract class DateTime extends ValueObject {
   private readonly _value: Date
@@ -32,7 +32,7 @@ export abstract class DateTime extends ValueObject {
 
 const codec = t.union([tt.date, tt.DateFromISOString])
 
-export const DateTimeFromCtorC = <A extends DateTime>(ctor: new (input: string | Date | DateTime) => A) =>
+export const DateTimeFromCtorC = <A extends DateTime>(ctor: new (input: string | Date | A) => A) =>
   new t.Type(
     ctor.name,
     (u): u is A => u instanceof ctor,
