@@ -2,9 +2,10 @@ import { Option } from 'fp-ts/Option'
 import { TaskEither } from 'fp-ts/TaskEither'
 import { AggregateRoot, IdOf, TypeOf } from '../../domain/entity'
 import { Id } from '../../domain/value-object'
+import { Logger } from '../logging'
 
 export abstract class Repository<A extends AggregateRoot<Id>> {
-  readonly _aggregateType!: TypeOf<A>
+  constructor(protected logger: Logger) {}
 
   abstract readManyById(ids: ReadonlyArray<IdOf<A>>): TaskEither<Error, ReadonlyArray<A>>
 
