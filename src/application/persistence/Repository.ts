@@ -1,19 +1,19 @@
 import { Option } from 'fp-ts/Option'
 import { TaskEither } from 'fp-ts/TaskEither'
-import { AggregateRoot, IdOf, TypeOf } from '../../domain/entity'
+import { Entity, IdOf, TypeOf } from '../../domain/entity'
 import { Id } from '../../domain/value-object'
 import { Logger } from '../logging'
 
-export abstract class Repository<A extends AggregateRoot<Id>> {
-  constructor(protected logger: Logger) {}
+export abstract class Repository<E extends Entity<Id>> {
+  constructor(protected logger?: Logger) {}
 
-  abstract readManyById(ids: ReadonlyArray<IdOf<A>>): TaskEither<Error, ReadonlyArray<A>>
+  abstract readManyById(ids: ReadonlyArray<IdOf<E>>): TaskEither<Error, ReadonlyArray<E>>
 
-  abstract readOneById(id: IdOf<A>): TaskEither<Error, Option<A>>
+  abstract readOneById(id: IdOf<E>): TaskEither<Error, Option<E>>
 
-  abstract upsertMany(aggregates: ReadonlyArray<A>): TaskEither<Error, void>
+  abstract upsertMany(entities: ReadonlyArray<E>): TaskEither<Error, ReadonlyArray<E>>
 
-  abstract upsertOne(aggregate: A): TaskEither<Error, void>
+  abstract upsertOne(entity: E): TaskEither<Error, E>
 }
 
-export type AggregateOf<A extends AggregateRoot<Id>, R extends Repository<A>> = TypeOf<A>
+export type EntityOf<E extends Entity<Id>, R extends Repository<E>> = TypeOf<E>

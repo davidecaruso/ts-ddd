@@ -1,45 +1,43 @@
 import { ReadonlyRecord } from 'fp-ts/ReadonlyRecord'
 import { Task } from 'fp-ts/Task'
 
-type Context = ReadonlyRecord<string, unknown>
-
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc5424.html
  */
-type Severity = 'debug' | 'info' | 'notice' | 'warning' | 'error' | 'critical' | 'alert' | 'emergency'
+export type LoggerSeverity = 'debug' | 'info' | 'notice' | 'warning' | 'error' | 'critical' | 'alert' | 'emergency'
 
 export abstract class Logger {
-  debug<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  debug<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  info<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  info<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  notice<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  notice<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  warning<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  warning<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  error<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  error<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  critical<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  critical<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  alert<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  alert<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  emergency<M>(message: M, context?: Context) {
-    return this.log('debug', message, context)
+  emergency<M>(message: M) {
+    return this.log('debug', message)
   }
 
-  protected abstract log<M>(severity: Severity, message: M, context?: Context): Task<void>
+  protected abstract log<M>(severity: LoggerSeverity, message: M): void
 }

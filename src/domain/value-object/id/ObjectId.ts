@@ -1,6 +1,6 @@
 import { ObjectID } from 'bson'
 import * as t from 'io-ts'
-import { InvalidObjectIdGivenError } from '../../error/InvalidObjectIdGivenError'
+import { InvalidObjectIdGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class ObjectId extends Id {

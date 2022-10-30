@@ -1,7 +1,7 @@
 import { either } from 'fp-ts'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { InvalidNumberGivenError } from '../../../error/InvalidNumberGivenError'
+import { InvalidNumberGivenError } from '../../../error'
 import { UnsignedNumber } from './UnsignedNumber'
 
 /**
@@ -25,9 +25,7 @@ export abstract class UnsignedInteger extends UnsignedNumber {
   }
 }
 
-export const UnsignedIntegerC = <A extends UnsignedInteger>(
-  ctor: new (input: number | string | UnsignedInteger) => A,
-) =>
+export const UnsignedIntegerC = <A extends UnsignedInteger>(ctor: new (input: number | string | A) => A) =>
   new t.Type(
     ctor.name ?? UnsignedInteger.name,
     (u): u is A => u instanceof ctor,

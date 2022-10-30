@@ -1,8 +1,7 @@
 import { either } from 'fp-ts'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { InvalidNumberGivenError } from '../../../error/InvalidNumberGivenError'
-import { NegativeNumberGivenError } from '../../../error/NegativeNumberGivenError'
+import { InvalidNumberGivenError, NegativeNumberGivenError } from '../../../error'
 import { AbstractNumber } from '../AbstractNumber'
 
 /**

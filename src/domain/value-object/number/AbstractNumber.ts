@@ -1,7 +1,8 @@
+import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
 export abstract class AbstractNumber extends ValueObject {
-  private _value!: number
+  protected _value!: number
 
   get value() {
     return this._value
@@ -11,26 +12,26 @@ export abstract class AbstractNumber extends ValueObject {
     this._value = n
   }
 
-  add<N extends this>(n: N): this {
-    this._value = this._value + n.value
+  add<N extends this | number>(n: N): this {
+    this._value = this._value + (t.number.is(n) ? n : n.value)
 
     return this
   }
 
-  sub<N extends this>(n: N): this {
-    this._value = this._value - n.value
+  sub<N extends this | number>(n: N): this {
+    this._value = this._value - (t.number.is(n) ? n : n.value)
 
     return this
   }
 
-  mul<N extends this>(n: N): this {
-    this._value = this._value * n.value
+  mul<N extends this | number>(n: N): this {
+    this._value = this._value * (t.number.is(n) ? n : n.value)
 
     return this
   }
 
-  div<N extends this>(n: N): this {
-    this._value = this._value / n.value
+  div<N extends this | number>(n: N): this {
+    this._value = this._value / (t.number.is(n) ? n : n.value)
 
     return this
   }

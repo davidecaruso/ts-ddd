@@ -6,7 +6,7 @@ import { UnsignedInteger } from '../number/unsigned/UnsignedInteger'
 import { Id } from './Id'
 
 export abstract class IntegerId extends Id {
-  private readonly value: t.Int
+  protected readonly value: t.Int
 
   constructor(input: number | string | UnsignedInteger | IntegerId) {
     const value =

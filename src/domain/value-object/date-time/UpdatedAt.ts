@@ -1,8 +1,10 @@
-import * as t from 'io-ts'
+import { CreatedAt } from './CreatedAt'
 import { DateTime, DateTimeFromCtorC } from './DateTime'
 
 export class UpdatedAt extends DateTime {
-  protected get codec(): t.Mixed {
-    return DateTimeFromCtorC(UpdatedAt)
+  static fromCreatedAt(createdAt: CreatedAt): UpdatedAt {
+    return new UpdatedAt(createdAt)
   }
 }
+
+export const UpdatedAtC = DateTimeFromCtorC(UpdatedAt)
