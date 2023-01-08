@@ -16,14 +16,9 @@
   "repository": "git+https://github.com/davidecaruso/ddd-ts.git",
   "license": "MIT",
   "dependencies": {
-    "@types/mongodb": "^4.0.7",
-    "@types/pino": "^7.0.5",
-    "fastify": "^4.9.2",
     "fp-ts": "^2.12.3",
     "io-ts": "^2.2.19",
-    "io-ts-types": "^0.5.19",
-    "mongodb": "^4.11.0",
-    "pino": "^8.7.0"
+    "io-ts-types": "^0.5.19"
   },
   "devDependencies": {
     "@types/jest": "^29.1.2",

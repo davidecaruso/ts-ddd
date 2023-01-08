@@ -14,6 +14,10 @@ export class InMemoryEventEmitterAdapter extends EventPublisher {
     super(logger)
   }
 
+  listen(event: string, callback: (...args: any[]) => void) {
+    this.emitter.on(event, callback)
+  }
+
   publish<E extends Event<Id>>(e: ReadonlyArray<E> | E): TaskEither<Error, void> {
     return pipe(
       t.readonlyArray(t.unknown).is(e) ? [...e] : [e],

@@ -1,3 +1,4 @@
+import { number } from 'fp-ts'
 import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
@@ -13,19 +14,19 @@ export abstract class AbstractNumber extends ValueObject {
   }
 
   add<N extends this | number>(n: N): this {
-    this._value = this._value + (t.number.is(n) ? n : n.value)
+    this._value = number.MonoidSum.concat(this._value, t.number.is(n) ? n : n.value)
 
     return this
   }
 
   sub<N extends this | number>(n: N): this {
-    this._value = this._value - (t.number.is(n) ? n : n.value)
+    this._value = number.MagmaSub.concat(this._value, t.number.is(n) ? n : n.value)
 
     return this
   }
 
   mul<N extends this | number>(n: N): this {
-    this._value = this._value * (t.number.is(n) ? n : n.value)
+    this._value = number.MonoidProduct.concat(this._value, t.number.is(n) ? n : n.value)
 
     return this
   }

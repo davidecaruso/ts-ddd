@@ -4,8 +4,8 @@ import { Option } from 'fp-ts/Option'
 import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
 import { IdOf } from '../../../../../../src/domain/entity'
-import { UserRepository as IUserRepository } from '../../../components/order/application/repositories/UserRepository'
-import { User, UserC } from '../../../components/order/domain/entities/User'
+import { UserRepository as IUserRepository } from '../../../components/user/application/repositories/UserRepository'
+import { User, UserC } from '../../../components/user/domain/entities/User'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 
 export class UserRepository extends MongoDbRepositoryAdapter<User> implements IUserRepository {

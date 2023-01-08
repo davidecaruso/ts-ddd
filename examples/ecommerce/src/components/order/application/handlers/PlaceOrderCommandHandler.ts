@@ -4,13 +4,13 @@ import { ReaderTaskEither } from 'fp-ts/ReaderTaskEither'
 import { CommandHandler } from '../../../../../../../src/application/handler'
 import { Logger } from '../../../../../../../src/application/logging'
 import { EventPublisher } from '../../../../../../../src/application/messaging'
+import { UserRepository } from '../../../user/application/repositories/UserRepository'
 import { Order } from '../../domain/entities/Order'
 import { Product } from '../../domain/entities/Product'
 import { ProductQuantity } from '../../domain/value-objects/ProductQuantity'
 import { PlaceOrderCommand } from '../commands/PlaceOrderCommand'
 import { OrderRepository } from '../repositories/OrderRepository'
 import { ProductRepository } from '../repositories/ProductRepository'
-import { UserRepository } from '../repositories/UserRepository'
 
 type Dependencies = {
   logger?: Logger

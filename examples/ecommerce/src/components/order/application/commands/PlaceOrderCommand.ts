@@ -1,9 +1,9 @@
-import { Command } from '../../../../../../../src/application/dto'
-import { ProductId, ProductIdC } from '../../domain/value-objects/ProductId'
-import { ProductQuantity, ProductQuantityC } from '../../domain/value-objects/ProductQuantity'
-import { UserId, UserIdC } from '../../domain/value-objects/UserId'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
+import { Command } from '../../../../../../../src/application/dto'
+import { UserId, UserIdC } from '../../../user/domain/value-objects/UserId'
+import { ProductId, ProductIdC } from '../../domain/value-objects/ProductId'
+import { ProductQuantity, ProductQuantityC } from '../../domain/value-objects/ProductQuantity'
 
 export interface PlaceOrderCommand extends Command {
   userId: UserId
