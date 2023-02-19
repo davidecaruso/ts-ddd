@@ -1,6 +1,3 @@
-import { ReadonlyRecord } from 'fp-ts/ReadonlyRecord'
-import { Task } from 'fp-ts/Task'
-
 /**
  * @see https://datatracker.ietf.org/doc/html/rfc5424.html
  */

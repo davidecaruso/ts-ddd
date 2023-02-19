@@ -1,7 +1,7 @@
 {
   "name": "ddd-ts",
   "version": "0.0.0",
-  "description": "DDD boilerplate for TypeScript projects",
+  "description": "Amazing DDD tools and where to find them",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --build",

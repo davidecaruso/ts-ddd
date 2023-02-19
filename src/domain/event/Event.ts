@@ -1,11 +1,11 @@
 import { Id } from '../value-object'
 
-export abstract class Event<A extends Id, T = string> {
-  abstract readonly _type: T
+export abstract class Event<I extends Id> {
+  readonly _type!: string
 
-  constructor(readonly id: A) {}
+  constructor(readonly id: I) {}
 
-  equals(that: Event<A>) {
+  equals(that: Event<I>) {
     return that.constructor === this.constructor && that.id.equals(this.id)
   }
 

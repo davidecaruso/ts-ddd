@@ -1,7 +1,7 @@
 import { either } from 'fp-ts'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { InvalidIntegerIdGivenError } from '../../error/InvalidIntegerIdGivenError'
+import { InvalidIntegerIdGivenError } from '../../error'
 import { UnsignedInteger } from '../number/unsigned/UnsignedInteger'
 import { Id } from './Id'
 
@@ -43,7 +43,7 @@ export const IntegerIdC = <A extends IntegerId>(
     (u): u is A => u instanceof Ctor,
     (u, c) => {
       try {
-        return t.success(new Ctor(u as any))
+        return t.success(new Ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

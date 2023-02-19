@@ -9,4 +9,4 @@ export abstract class Id extends ValueObject {
   abstract toRaw(): unknown
 }
 
-export type IdC<A extends Id> = t.Type<A, string>
+export type IdC<I extends Id> = t.Type<I, string>

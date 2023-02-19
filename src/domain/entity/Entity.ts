@@ -1,22 +1,22 @@
 import * as t from 'io-ts'
 import { Id, IdC } from '../value-object'
 
-export abstract class Entity<A extends Id, T = string> {
-  abstract readonly _type: T
+export abstract class Entity<I extends Id> {
+  readonly _type!: string
 
-  constructor(readonly id: A) {}
+  constructor(readonly id: I) {}
 
-  equals(that: Entity<A>): boolean {
+  equals(that: Entity<I>): boolean {
     return that.constructor === this.constructor && that.id.equals(this.id)
   }
 }
 
-export const EntityC = <A extends string, B extends Id>(type: A, idC: IdC<B>) =>
+export const EntityC = <I extends Id>(idC: IdC<I>, type: string) =>
   t.type({
     _type: t.literal(type),
     id: idC,
   })
 
-export type TypeOf<A extends Entity<Id>> = A['_type']
+export type TypeOf<E extends Entity<Id>> = E['_type']
 
-export type IdOf<A extends Entity<Id>> = A['id']
+export type IdOf<E extends Entity<Id>> = E['id']

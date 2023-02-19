@@ -1,5 +1,5 @@
 import * as t from 'io-ts'
-import { AggregateRoot, Entity } from '../../../../../../../src/domain/entity'
+import { AggregateRoot } from '../../../../../../../src/domain/entity'
 import { CreatedAt, UpdatedAt } from '../../../../../../../src/domain/value-object'
 import { UserEmail } from '../value-objects/UserEmail'
 import { UserFirstName } from '../value-objects/UserFirstName'

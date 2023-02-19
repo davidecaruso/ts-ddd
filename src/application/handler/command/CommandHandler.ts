@@ -1,3 +1,5 @@
 import { Command } from '../../dto'
 
-export type CommandHandler<C extends Command, A> = (command: C) => A
+export interface CommandHandler<C extends Command, A> {
+  (c: C): A
+}

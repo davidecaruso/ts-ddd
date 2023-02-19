@@ -29,7 +29,7 @@ export const UuidC = <A extends Uuid>(ctor: new (input?: string | Uuid) => A) =>
     (u): u is A => u instanceof ctor,
     (u, c) => {
       try {
-        return t.success(new ctor(u as any))
+        return t.success(new ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

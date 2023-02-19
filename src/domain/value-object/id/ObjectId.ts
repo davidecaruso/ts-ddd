@@ -40,7 +40,7 @@ export const ObjectIdC = <A extends ObjectId>(ctor: new (input?: string | Object
     (u): u is A => u instanceof ctor,
     (u, c) => {
       try {
-        return t.success(new ctor(u as any))
+        return t.success(new ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

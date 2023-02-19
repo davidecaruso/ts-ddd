@@ -4,7 +4,7 @@ import * as t from 'io-ts'
 import { identity } from 'io-ts'
 import { ReadonlyNonEmptyArray } from 'io-ts-types'
 import { AggregateRoot } from '../../../../../../../src/domain/entity'
-import { CreatedAt, ObjectId, UpdatedAt } from '../../../../../../../src/domain/value-object'
+import { CreatedAt, UpdatedAt } from '../../../../../../../src/domain/value-object'
 import { User } from '../../../user/domain/entities/User'
 import { UserId } from '../../../user/domain/value-objects/UserId'
 import { EmptyOrderError } from '../errors/EmptyOrderError'
@@ -18,9 +18,18 @@ import { ProductPrice } from '../value-objects/ProductPrice'
 import { ProductQuantity } from '../value-objects/ProductQuantity'
 import { Product } from './Product'
 
-export class Order extends AggregateRoot<ObjectId> {
-  readonly _type: string = 'order'
+export class Order extends AggregateRoot<OrderId> {
+  readonly _type = 'order'
   readonly updatedAt: UpdatedAt
+
+  get total(): OrderTotal {
+    return pipe(
+      this.products,
+      readonlyNonEmptyArray.reduce(new OrderTotal(0), (total, { id, price, quantity }) =>
+        total.add(price.value * quantity.value),
+      ),
+    )
+  }
 
   protected constructor(
     readonly code: OrderNumber,
@@ -65,15 +74,6 @@ export class Order extends AggregateRoot<ObjectId> {
     order.emit(new OrderCreatedEvent(order.id))
 
     return order
-  }
-
-  get total(): OrderTotal {
-    return pipe(
-      this.products,
-      readonlyNonEmptyArray.reduce(new OrderTotal(0), (total, { id, price, quantity }) =>
-        total.add(price.value * quantity.value),
-      ),
-    )
   }
 }
 

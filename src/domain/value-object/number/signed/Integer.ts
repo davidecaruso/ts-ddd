@@ -1,7 +1,7 @@
 import { either } from 'fp-ts'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { InvalidNumberGivenError } from '../../../error/InvalidNumberGivenError'
+import { InvalidNumberGivenError } from '../../../error'
 import { SignedNumber } from './SignedNumber'
 
 export abstract class Integer extends SignedNumber {
@@ -26,7 +26,7 @@ export const IntegerC = <A extends Integer>(ctor: new (input: number | string | 
     (u): u is A => u instanceof ctor,
     (u, c) => {
       try {
-        return t.success(new ctor(u as any))
+        return t.success(new ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

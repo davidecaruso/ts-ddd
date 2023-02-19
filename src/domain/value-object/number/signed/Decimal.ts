@@ -13,7 +13,7 @@ export const DecimalC = <A extends Decimal>(ctor: new (input: number | string | 
     (u): u is A => u instanceof ctor,
     (u, c) => {
       try {
-        return t.success(new ctor(u as any))
+        return t.success(new ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

@@ -1,3 +1,3 @@
-import { DomainEvent } from './DomainEvent'
+import { ApplicationEvent } from './ApplicationEvent'
 
-export { DomainEvent }
+export { ApplicationEvent }

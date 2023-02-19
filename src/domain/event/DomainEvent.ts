@@ -2,10 +2,10 @@ import { AggregateRoot, IdOf, TypeOf } from '../entity'
 import { Id } from '../value-object'
 import { Event } from './Event'
 
-export abstract class DomainEvent<A extends Id, B extends AggregateRoot<Id>> extends Event<A> {
-  readonly _aggregateType!: TypeOf<B>
+export abstract class DomainEvent<I extends Id, A extends AggregateRoot<Id>> extends Event<I> {
+  readonly _aggregateType!: TypeOf<A>
 
-  constructor(readonly id: A, readonly _aggregateId: IdOf<B>) {
+  constructor(readonly id: I, readonly _aggregateId: IdOf<A>) {
     super(id)
   }
 

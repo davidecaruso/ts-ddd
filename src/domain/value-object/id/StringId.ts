@@ -2,7 +2,7 @@ import { either } from 'fp-ts'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
 import { NonEmptyString } from 'io-ts-types'
-import { InvalidStringIdGivenError } from '../../error/InvalidStringIdGivenError'
+import { InvalidStringIdGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class StringId extends Id {
@@ -38,7 +38,7 @@ export const StringIdC = <A extends StringId>(ctor: new (input: number | string 
     (u): u is A => u instanceof ctor,
     (u, c) => {
       try {
-        return t.success(new ctor(u as any))
+        return t.success(new ctor(u as A))
       } catch (error) {
         return t.failure(u, c)
       }

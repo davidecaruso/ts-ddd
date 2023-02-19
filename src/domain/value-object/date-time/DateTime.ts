@@ -4,10 +4,11 @@ import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
 import { ValueObject } from '../index'
 
-export abstract class DateTime implements ValueObject {
+export abstract class DateTime extends ValueObject {
   protected readonly _value: Date
 
   constructor(input: string | Date | DateTime = new Date()) {
+    super()
     this._value =
       input instanceof DateTime ? new Date(input.toString()) : input instanceof Date ? input : new Date(input)
   }
@@ -44,12 +45,3 @@ export const DateTimeFromCtorC = <A extends DateTime>(ctor: new (input: string |
           ),
     o => o.value,
   )
-
-// export const DateTimeFromCtorM =
-//   <A extends DateTime>(Ctor: new (input: Input) => A) =>
-//   (endDate: Date = new Date()): Mock<A> =>
-//     pipe(
-//       $mock.integer(0, endDate.getTime()),
-//       $mock.map(n => new Date(n)),
-//       $mock.map(date => new Ctor(date)),
-//     )

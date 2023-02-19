@@ -1,1 +1,3 @@
-export abstract class ValueObject {}
+export abstract class ValueObject {
+  readonly _type!: string
+}

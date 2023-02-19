@@ -28,7 +28,7 @@ app.eventPublisher.listen('order-created', async (event: OrderCreatedEvent) => {
 
   setTimeout(() => logger.info('Sending email to the customer... '), 2000)
   if (either.isRight(order)) {
-    const user = app.userRepository.readOneById(order.right.userId)
+    app.userRepository.readOneById(order.right.userId)
     // ...
   }
 })
