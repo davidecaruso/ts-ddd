@@ -1,2 +1,4 @@
 *.js
+examples/
 lib/
+node_modules/

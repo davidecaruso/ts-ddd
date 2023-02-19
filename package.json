@@ -5,10 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc --build",
-    "eslint": "eslint --fix-dry-run ./",
-    "eslint:fix": "eslint --fix ./",
-    "prettier": "prettier --check ./",
-    "prettier:fix": "prettier --write ./",
+    "lint": "eslint --fix-dry-run ./",
+    "lint:fix": "eslint --fix ./",
+    "pretty": "prettier --write ./",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
@@ -25,6 +24,7 @@
     "@types/node": "^18.8.4",
     "@types/prettier": "^2.7.1",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^4.25.0",
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-fp-ts": "^0.3.2",
