@@ -4,11 +4,11 @@ import * as t from 'io-ts'
 import { NonEmptyString } from 'io-ts-types'
 import { ValueObject } from '../../../../../../../src/domain/value-object'
 
-export class UserEmail extends ValueObject {
+export class UserEmail implements ValueObject {
   private readonly _value: string
+  readonly _type = 'user-email'
 
   constructor(input: string | UserEmail) {
-    super()
     this._value = input instanceof UserEmail ? input.value : input
 
     // TODO: Add email checks

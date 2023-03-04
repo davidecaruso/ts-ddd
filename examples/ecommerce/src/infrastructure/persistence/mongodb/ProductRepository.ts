@@ -17,7 +17,7 @@ export class ProductRepository extends MongoDbRepositoryAdapter<Product> impleme
       this.client,
       taskEither.chain(connection =>
         taskEither.tryCatch(
-          async () => await Promise.resolve([{ id: new ObjectId('602cf58400f4c67f28ddcc0c') }]),
+          async () => await Promise.resolve([{ id: new ObjectId('640318e5ae2b9170a39d349c') }]),
           // await connection
           //   .db()
           //   .collection(this.collectionName)

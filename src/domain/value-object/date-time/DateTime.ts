@@ -4,11 +4,11 @@ import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
 import { ValueObject } from '../index'
 
-export abstract class DateTime extends ValueObject {
+export abstract class DateTime implements ValueObject {
   protected readonly _value: Date
+  readonly _type!: string
 
   constructor(input: string | Date | DateTime = new Date()) {
-    super()
     this._value =
       input instanceof DateTime ? new Date(input.toString()) : input instanceof Date ? input : new Date(input)
   }

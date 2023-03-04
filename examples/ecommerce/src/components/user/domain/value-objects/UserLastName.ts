@@ -4,11 +4,11 @@ import * as t from 'io-ts'
 import { NonEmptyString } from 'io-ts-types'
 import { ValueObject } from '../../../../../../../src/domain/value-object'
 
-export class UserLastName extends ValueObject {
+export class UserLastName implements ValueObject {
   private readonly _value: string
+  readonly _type = 'user-last-name'
 
   constructor(input: string | UserLastName) {
-    super()
     this._value = input instanceof UserLastName ? input.value : input
   }
 

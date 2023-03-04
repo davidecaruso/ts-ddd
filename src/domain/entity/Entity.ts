@@ -1,14 +1,9 @@
 import * as t from 'io-ts'
 import { Id, IdC } from '../value-object'
 
-export abstract class Entity<I extends Id> {
-  readonly _type!: string
-
-  constructor(readonly id: I) {}
-
-  equals(that: Entity<I>): boolean {
-    return that.constructor === this.constructor && that.id.equals(this.id)
-  }
+export interface Entity<I extends Id> {
+  readonly _type: string
+  readonly id: I
 }
 
 export const EntityC = <I extends Id>(idC: IdC<I>, type: string) =>

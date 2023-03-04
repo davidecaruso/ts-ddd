@@ -22,15 +22,6 @@ export class Order extends AggregateRoot<OrderId> {
   readonly _type = 'order'
   readonly updatedAt: UpdatedAt
 
-  get total(): OrderTotal {
-    return pipe(
-      this.products,
-      readonlyNonEmptyArray.reduce(new OrderTotal(0), (total, { id, price, quantity }) =>
-        total.add(price.value * quantity.value),
-      ),
-    )
-  }
-
   protected constructor(
     readonly code: OrderNumber,
     readonly products: ReadonlyNonEmptyArray<{ id: ProductId; price: ProductPrice; quantity: ProductQuantity }>,
@@ -42,6 +33,15 @@ export class Order extends AggregateRoot<OrderId> {
     super(id)
 
     this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
+  }
+
+  get total(): OrderTotal {
+    return pipe(
+      this.products,
+      readonlyNonEmptyArray.reduce(new OrderTotal(0), (total, { id, price, quantity }) =>
+        total.add(price.value * quantity.value),
+      ),
+    )
   }
 
   static create(products: ReadonlyNonEmptyArray<[Product, ProductQuantity]>, user: User): Order {
