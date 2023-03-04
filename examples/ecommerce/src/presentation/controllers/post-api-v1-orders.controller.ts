@@ -1,28 +1,39 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import { either, readerTaskEither } from 'fp-ts'
+import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
+import { BadRequestError, InternalServerError } from '../../../../../src/presentation/error'
 import { AppInstance } from '../../../app/app'
 import { PlaceOrderCommandC } from '../../components/order/application/commands/PlaceOrderCommand'
 import { PlaceOrderCommandHandler } from '../../components/order/application/handlers/PlaceOrderCommandHandler'
 
 export default (app: AppInstance) => async (request: FastifyRequest, reply: FastifyReply) => {
-  const result = await pipe(
+  const command = pipe(
     request.body,
     PlaceOrderCommandC.decode,
-    readerTaskEither.fromEither,
-    readerTaskEither.chainW(PlaceOrderCommandHandler),
-  )({
-    logger: app.logger,
-    eventPublisher: app.eventPublisher,
-    orderRepository: app.orderRepository,
-    productRepository: app.productRepository,
-    userRepository: app.userRepository,
-  })()
+    either.mapLeft(e => new BadRequestError('Some date is invalid', e.toString())),
+  )
+
+  if (either.isLeft(command)) {
+    reply.statusCode = command.left.status
+
+    return command.left.toJson()
+  }
+
+  const result = pipe(
+    await PlaceOrderCommandHandler(command.right)({
+      logger: app.logger,
+      eventPublisher: app.eventPublisher,
+      orderRepository: app.orderRepository,
+      productRepository: app.productRepository,
+      userRepository: app.userRepository,
+    })(),
+    either.mapLeft(e => new InternalServerError('There was an error during order creation', e.toString())),
+  )
 
   if (either.isLeft(result)) {
-    reply.statusCode = 400
-    // Handle other error types
-    return { error: result.left instanceof Error ? result.left.message : JSON.stringify(result.left) }
+    reply.statusCode = result.left.status
+
+    return result.left.toJson()
   }
 
   reply.statusCode = 201
