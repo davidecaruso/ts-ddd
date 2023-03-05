@@ -2,6 +2,7 @@ import { EventEmitter } from 'events'
 import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import pino from 'pino'
+import { DomainEvent } from '../../../src/domain/event'
 import { OrderCreatedEvent } from '../src/components/order/domain/events/OrderCreatedEvent'
 import { PinoLoggerAdapter } from '../src/infrastructure/logging/PinoLoggerAdapter'
 import server from '../src/presentation/server'
@@ -19,7 +20,19 @@ const app = bootstrap(
   logger,
 )
 
-app.eventPublisher.listen('order-created', async (event: OrderCreatedEvent) => {
+app.eventPublisher.listen<OrderCreatedEvent>('order-created', async event => {
+  logger.debug(
+    `Event listened: ${JSON.stringify({
+      id: event.id,
+      type: event._type,
+      ...(event instanceof DomainEvent && {
+        layer: 'domain',
+        aggregateId: event._aggregateId,
+        aggregateType: event._aggregateType,
+      }),
+    })}`,
+  )
+
   const order = pipe(
     await app.orderRepository.readOneById(event._aggregateId)(),
     either.map(either.fromOption(Error)),

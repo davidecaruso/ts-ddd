@@ -71,7 +71,7 @@ export class Order extends AggregateRoot<OrderId> {
       user.id,
     )
 
-    order.emit(new OrderCreatedEvent(order.id))
+    order.raise(new OrderCreatedEvent(order.id))
 
     return order
   }

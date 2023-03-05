@@ -1,21 +1,25 @@
 import { EventEmitter } from 'events'
-import { ioEither, task, taskEither } from 'fp-ts'
+import { either, ioEither, task, taskEither } from 'fp-ts'
 import { constant, constVoid, pipe } from 'fp-ts/function'
 import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
+import { EventListener, EventPublisher } from '../../../../../src/application/event'
 import { Logger } from '../../../../../src/application/logging'
-import { EventPublisher } from '../../../../../src/application/messaging'
 import { AggregateRoot } from '../../../../../src/domain/entity'
-import { DomainEvent } from '../../../../../src/domain/event'
+import { DomainEvent, TypeOf } from '../../../../../src/domain/event'
 import { Id } from '../../../../../src/domain/value-object'
 
-export class InMemoryEventEmitterAdapter extends EventPublisher {
-  constructor(private emitter: EventEmitter, protected logger?: Logger) {
-    super(logger)
-  }
+export class InMemoryEventEmitterAdapter implements EventPublisher, EventListener {
+  constructor(private emitter: EventEmitter, protected logger?: Logger) {}
 
-  listen(event: string, callback: (...args: any[]) => void) {
-    this.emitter.on(event, callback)
+  listen<E extends DomainEvent<Id, AggregateRoot<Id>>>(t: TypeOf<E>, callback: (e: E) => void) {
+    return pipe(
+      either.tryCatch(
+        () => this.emitter.on(t, callback),
+        err => new Error(`There was an error while listening "${t}" event: ${JSON.stringify(err)}`),
+      ),
+      either.map(constVoid),
+    )
   }
 
   publish<E extends DomainEvent<Id, AggregateRoot<Id>>>(e: ReadonlyArray<E> | E): TaskEither<Error, void> {
@@ -24,11 +28,8 @@ export class InMemoryEventEmitterAdapter extends EventPublisher {
       taskEither.traverseArray(event =>
         pipe(
           ioEither.tryCatch(
-            () => this.emitter.emit(event._type, event.toJson()),
-            err =>
-              new Error(
-                `There was an error during the emission for the event "${event._type}": ${JSON.stringify(err)}`,
-              ),
+            () => this.emitter.emit(event._type, event),
+            err => new Error(`There was an error while emitting "${event._type}" event: ${JSON.stringify(err)}`),
           ),
           taskEither.fromIOEither,
           taskEither.chainTaskK(

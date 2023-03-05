@@ -9,7 +9,7 @@ export abstract class AggregateRoot<I extends Id> extends Entity<I> {
     return this._events
   }
 
-  protected emit(event: DomainEvent<Id, this>): void {
+  protected raise(event: DomainEvent<Id, this>): void {
     this._events.push(event)
   }
 }
