@@ -5,7 +5,7 @@ import { ProductId, ProductIdC } from '../value-objects/ProductId'
 import { ProductName } from '../value-objects/ProductName'
 import { ProductPrice } from '../value-objects/ProductPrice'
 
-export class Product implements Entity<ProductId> {
+export class Product extends Entity<ProductId> {
   readonly _type: string = 'product'
   readonly updatedAt: UpdatedAt
 
@@ -16,6 +16,7 @@ export class Product implements Entity<ProductId> {
     readonly createdAt: CreatedAt = new CreatedAt(),
     updatedAt?: UpdatedAt,
   ) {
+    super(id)
     this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
   }
 }
