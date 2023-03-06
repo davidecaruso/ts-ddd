@@ -1,4 +1,4 @@
 import { AggregateRoot } from './AggregateRoot'
-import { Entity, EntityC, IdOf, TypeOf } from './Entity'
+import { Entity, IdOf, TypeOf } from './Entity'
 
-export { AggregateRoot, Entity, EntityC, IdOf, TypeOf }
+export { AggregateRoot, Entity, IdOf, TypeOf }
