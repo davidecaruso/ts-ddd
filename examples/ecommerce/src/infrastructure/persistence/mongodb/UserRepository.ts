@@ -5,7 +5,7 @@ import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
 import { IdOf } from '../../../../../../src/domain/entity'
 import { UserRepository as IUserRepository } from '../../../components/user/application/repositories/UserRepository'
-import { User, UserC } from '../../../components/user/domain/entities/User'
+import { User } from '../../../components/user/domain/entities/User'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 
 export class UserRepository extends MongoDbRepositoryAdapter<User> implements IUserRepository {
@@ -31,7 +31,7 @@ export class UserRepository extends MongoDbRepositoryAdapter<User> implements IU
           ),
         ),
       ),
-      taskEither.chainEitherKW(flow(t.union([t.null, UserC]).decode)),
+      taskEither.chainEitherKW(flow(t.union([t.null, User.codec]).decode)),
       taskEither.map(option.fromNullable),
       taskEither.map(x => x as any),
       taskEither.mapLeft(e => new Error(e as any)),

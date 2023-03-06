@@ -5,7 +5,7 @@ import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
 import { IdOf } from '../../../../../../src/domain/entity'
 import { OrderRepository as IOrderRepository } from '../../../components/order/application/repositories/OrderRepository'
-import { Order, OrderC } from '../../../components/order/domain/entities/Order'
+import { Order } from '../../../components/order/domain/entities/Order'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 
 export class OrderRepository extends MongoDbRepositoryAdapter<Order> implements IOrderRepository {
@@ -31,7 +31,7 @@ export class OrderRepository extends MongoDbRepositoryAdapter<Order> implements 
           ),
         ),
       ),
-      taskEither.chainEitherKW(flow(t.union([t.null, OrderC]).decode)),
+      taskEither.chainEitherKW(flow(t.union([t.null, Order.codec]).decode)),
       taskEither.map(option.fromNullable),
       taskEither.map(x => x as any),
       taskEither.mapLeft(e => new Error(e as any)),

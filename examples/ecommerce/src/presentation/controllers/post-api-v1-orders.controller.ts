@@ -3,13 +3,13 @@ import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import { BadRequestError, InternalServerError } from '../../../../../src/presentation/error'
 import { AppInstance } from '../../../app/app'
-import { PlaceOrderCommandC } from '../../components/order/application/commands/PlaceOrderCommand'
+import { PlaceOrderCommand } from '../../components/order/application/commands/PlaceOrderCommand'
 import { PlaceOrderCommandHandler } from '../../components/order/application/handlers/PlaceOrderCommandHandler'
 
 export default (app: AppInstance) => async (request: FastifyRequest, reply: FastifyReply) => {
   const command = pipe(
     request.body,
-    PlaceOrderCommandC.decode,
+    PlaceOrderCommand.decode,
     either.mapLeft(e => new BadRequestError('Some date is invalid', e.toString())),
   )
 

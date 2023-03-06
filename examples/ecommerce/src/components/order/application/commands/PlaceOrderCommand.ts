@@ -1,9 +1,9 @@
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
 import { Command } from '../../../../../../../src/application/dto'
-import { UserId, UserIdC } from '../../../user/domain/value-objects/UserId'
-import { ProductId, ProductIdC } from '../../domain/value-objects/ProductId'
-import { ProductQuantity, ProductQuantityC } from '../../domain/value-objects/ProductQuantity'
+import { UserId } from '../../../user/domain/value-objects/UserId'
+import { ProductId } from '../../domain/value-objects/ProductId'
+import { ProductQuantity } from '../../domain/value-objects/ProductQuantity'
 
 export interface PlaceOrderCommand extends Command {
   userId: UserId
@@ -13,14 +13,14 @@ export interface PlaceOrderCommand extends Command {
   }>
 }
 
-export const PlaceOrderCommandC = t.type(
+export const PlaceOrderCommand = t.type(
   {
-    userId: UserIdC,
+    userId: UserId.codec,
     products: tt.readonlyNonEmptyArray(
       t.type(
         {
-          id: ProductIdC,
-          quantity: ProductQuantityC,
+          id: ProductId.codec,
+          quantity: ProductQuantity.codec,
         },
         'PlaceOrderCommand<Product>',
       ),

@@ -6,7 +6,7 @@ import * as t from 'io-ts'
 import { ObjectId } from 'mongodb'
 import { IdOf } from '../../../../../../src/domain/entity'
 import { ProductRepository as IProductRepository } from '../../../components/order/application/repositories/ProductRepository'
-import { Product, ProductC } from '../../../components/order/domain/entities/Product'
+import { Product } from '../../../components/order/domain/entities/Product'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 
 export class ProductRepository extends MongoDbRepositoryAdapter<Product> implements IProductRepository {
@@ -25,7 +25,7 @@ export class ProductRepository extends MongoDbRepositoryAdapter<Product> impleme
           e => new Error(`Unable to read user: ${JSON.stringify(e)}`),
         ),
       ),
-      taskEither.chainEitherKW(flow(t.readonlyArray(ProductC).decode)),
+      taskEither.chainEitherKW(flow(t.readonlyArray(Product.codec).decode)),
       taskEither.map(x => x as any),
       taskEither.mapLeft(e => new Error(e as any)),
       taskEither.chainFirstW(() => this.close()),

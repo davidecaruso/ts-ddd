@@ -32,18 +32,20 @@ export abstract class ObjectId extends Id {
   toRaw(): unknown {
     return this.value
   }
-}
 
-export const ObjectIdC = <A extends ObjectId>(ctor: new (input?: string | ObjectID | ObjectId) => A) =>
-  new t.Type(
-    ctor.name ?? ObjectId.name,
-    (u): u is A => u instanceof ctor,
-    (u, c) => {
-      try {
-        return t.success(new ctor(u as A))
-      } catch (error) {
-        return t.failure(u, c)
-      }
-    },
-    o => o.toString(),
-  )
+  static get codec() {
+    return new t.Type(
+      this.name ?? ObjectId.name,
+      (u): u is typeof this => u instanceof this,
+      (u, c) => {
+        try {
+          // @ts-ignore
+          return t.success(new this(u as typeof this))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.toString(),
+    )
+  }
+}

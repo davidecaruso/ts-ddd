@@ -3,17 +3,17 @@ import { DateTime } from './date-time/DateTime'
 import { DeletedAt } from './date-time/DeletedAt'
 import { OccurredAt } from './date-time/OccurredAt'
 import { UpdatedAt } from './date-time/UpdatedAt'
-import { Id, IdC } from './id/Id'
-import { IntegerId, IntegerIdC } from './id/IntegerId'
-import { ObjectId, ObjectIdC } from './id/ObjectId'
-import { StringId, StringIdC } from './id/StringId'
-import { Uuid, UuidC } from './id/Uuid'
+import { Id } from './id/Id'
+import { IntegerId } from './id/IntegerId'
+import { ObjectId } from './id/ObjectId'
+import { StringId } from './id/StringId'
+import { Uuid } from './id/Uuid'
 import { AbstractNumber } from './number/AbstractNumber'
-import { Decimal, DecimalC } from './number/signed/Decimal'
-import { Integer, IntegerC } from './number/signed/Integer'
+import { Decimal } from './number/signed/Decimal'
+import { Integer } from './number/signed/Integer'
 import { SignedNumber } from './number/signed/SignedNumber'
-import { UnsignedDecimal, UnsignedDecimalC } from './number/unsigned/UnsignedDecimal'
-import { UnsignedInteger, UnsignedIntegerC } from './number/unsigned/UnsignedInteger'
+import { UnsignedDecimal } from './number/unsigned/UnsignedDecimal'
+import { UnsignedInteger } from './number/unsigned/UnsignedInteger'
 import { UnsignedNumber } from './number/unsigned/UnsignedNumber'
 import { ValueObject } from './ValueObject'
 
@@ -21,28 +21,19 @@ export {
   AbstractNumber,
   CreatedAt,
   Decimal,
-  DecimalC,
   DateTime,
   DeletedAt,
   Id,
-  IdC,
-  IntegerC,
   Integer,
   IntegerId,
-  IntegerIdC,
   ObjectId,
-  ObjectIdC,
   OccurredAt,
   SignedNumber,
   StringId,
-  StringIdC,
   UnsignedDecimal,
-  UnsignedDecimalC,
   UnsignedInteger,
-  UnsignedIntegerC,
   UnsignedNumber,
   UpdatedAt,
   Uuid,
-  UuidC,
   ValueObject,
 }

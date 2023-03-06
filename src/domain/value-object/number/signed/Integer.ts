@@ -18,18 +18,20 @@ export abstract class Integer extends SignedNumber {
   equals(that: SignedNumber): boolean {
     return that instanceof Integer && that.constructor === this.constructor && that.value === this.value
   }
-}
 
-export const IntegerC = <A extends Integer>(ctor: new (input: number | string | Integer) => A) =>
-  new t.Type(
-    ctor.name ?? Integer.name,
-    (u): u is A => u instanceof ctor,
-    (u, c) => {
-      try {
-        return t.success(new ctor(u as A))
-      } catch (error) {
-        return t.failure(u, c)
-      }
-    },
-    o => o.value,
-  )
+  static get codec() {
+    return new t.Type(
+      this.name ?? Integer.name,
+      (u): u is typeof this => u instanceof this,
+      (u, c) => {
+        try {
+          // @ts-ignore
+          return t.success(new this(u as typeof this))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.value,
+    )
+  }
+}

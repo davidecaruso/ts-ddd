@@ -21,18 +21,20 @@ export abstract class Uuid extends Id {
   toRaw(): unknown {
     return this.bytes
   }
-}
 
-export const UuidC = <A extends Uuid>(ctor: new (input?: string | Uuid) => A) =>
-  new t.Type(
-    ctor.name ?? Uuid.name,
-    (u): u is A => u instanceof ctor,
-    (u, c) => {
-      try {
-        return t.success(new ctor(u as A))
-      } catch (error) {
-        return t.failure(u, c)
-      }
-    },
-    o => o.toString(),
-  )
+  static get codec() {
+    return new t.Type(
+      this.name ?? Uuid.name,
+      (u): u is typeof this => u instanceof this,
+      (u, c) => {
+        try {
+          // @ts-ignore
+          return t.success(new this(u as typeof this))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.toString(),
+    )
+  }
+}

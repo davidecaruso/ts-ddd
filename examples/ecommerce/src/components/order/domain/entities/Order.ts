@@ -75,6 +75,8 @@ export class Order extends AggregateRoot<OrderId> {
 
     return order
   }
-}
 
-export const OrderC = t.type({})
+  static get codec() {
+    return t.type({})
+  }
+}

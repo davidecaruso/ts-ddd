@@ -9,20 +9,20 @@ export abstract class UnsignedDecimal extends UnsignedNumber {
   equals(that: UnsignedNumber): boolean {
     return that instanceof UnsignedDecimal && that.constructor === this.constructor && that.value === this.value
   }
-}
 
-export const UnsignedDecimalC = <A extends UnsignedDecimal>(
-  ctor: new (input: number | string | UnsignedDecimal) => A,
-) =>
-  new t.Type(
-    ctor.name ?? UnsignedDecimal.name,
-    (u): u is A => u instanceof ctor,
-    (u, c) => {
-      try {
-        return t.success(new ctor(u as A))
-      } catch (error) {
-        return t.failure(u, c)
-      }
-    },
-    o => o.value,
-  )
+  static get codec() {
+    return new t.Type(
+      this.name ?? UnsignedDecimal.name,
+      (u): u is typeof this => u instanceof this,
+      (u, c) => {
+        try {
+          // @ts-ignore
+          return t.success(new this(u as typeof this))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.value,
+    )
+  }
+}

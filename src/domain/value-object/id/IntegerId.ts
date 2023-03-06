@@ -33,20 +33,20 @@ export abstract class IntegerId extends Id {
   toRaw(): unknown {
     return this.value
   }
-}
 
-export const IntegerIdC = <A extends IntegerId>(
-  Ctor: new (input: number | string | UnsignedInteger | IntegerId) => A,
-) =>
-  new t.Type(
-    Ctor.name ?? 'IntegerId',
-    (u): u is A => u instanceof Ctor,
-    (u, c) => {
-      try {
-        return t.success(new Ctor(u as A))
-      } catch (error) {
-        return t.failure(u, c)
-      }
-    },
-    o => o.toString(),
-  )
+  static get codec() {
+    return new t.Type(
+      this.name ?? 'IntegerId',
+      (u): u is typeof this => u instanceof this,
+      (u, c) => {
+        try {
+          // @ts-ignore
+          return t.success(new this(u as typeof this))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.toString(),
+    )
+  }
+}

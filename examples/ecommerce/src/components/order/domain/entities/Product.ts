@@ -1,7 +1,7 @@
 import * as t from 'io-ts'
 import { Entity } from '../../../../../../../src/domain/entity'
 import { CreatedAt, UpdatedAt } from '../../../../../../../src/domain/value-object'
-import { ProductId, ProductIdC } from '../value-objects/ProductId'
+import { ProductId } from '../value-objects/ProductId'
 import { ProductName } from '../value-objects/ProductName'
 import { ProductPrice } from '../value-objects/ProductPrice'
 
@@ -19,6 +19,8 @@ export class Product extends Entity<ProductId> {
     super(id)
     this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
   }
-}
 
-export const ProductC = t.type({ id: ProductIdC })
+  static get codec() {
+    return t.type({ id: ProductId.codec })
+  }
+}

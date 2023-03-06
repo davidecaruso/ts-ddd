@@ -22,6 +22,8 @@ export class User extends AggregateRoot<UserId> {
 
     this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
   }
-}
 
-export const UserC = t.type({})
+  static get codec() {
+    return t.type({})
+  }
+}
