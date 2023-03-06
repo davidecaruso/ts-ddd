@@ -1,5 +1,5 @@
 import { CreatedAt } from './date-time/CreatedAt'
-import { DateTime, DateTimeFromCtorC } from './date-time/DateTime'
+import { DateTime } from './date-time/DateTime'
 import { DeletedAt } from './date-time/DeletedAt'
 import { OccurredAt } from './date-time/OccurredAt'
 import { UpdatedAt } from './date-time/UpdatedAt'
@@ -24,7 +24,6 @@ export {
   DecimalC,
   DateTime,
   DeletedAt,
-  DateTimeFromCtorC,
   Id,
   IdC,
   IntegerC,

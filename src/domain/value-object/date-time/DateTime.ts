@@ -18,7 +18,7 @@ export abstract class DateTime implements ValueObject {
   }
 
   equals(that: DateTime): boolean {
-    return that._value === this._value
+    return that._value.getTime() === this._value.getTime()
   }
 
   toString(): string {
@@ -28,20 +28,20 @@ export abstract class DateTime implements ValueObject {
   toDateString(): string {
     return this._value.toISOString().substring(0, 10)
   }
+
+  static get codec() {
+    return new t.Type(
+      this.name,
+      (u): u is typeof this => u instanceof this,
+      (u, c) =>
+        u instanceof this
+          ? t.success(u)
+          : pipe(
+              t.union([tt.date, tt.DateFromISOString]).validate(u, c),
+              // @ts-ignore
+              either.map(d => new this(d)),
+            ),
+      o => o.value,
+    )
+  }
 }
-
-const codec = t.union([tt.date, tt.DateFromISOString])
-
-export const DateTimeFromCtorC = <A extends DateTime>(ctor: new (input: string | Date | A) => A) =>
-  new t.Type(
-    ctor.name,
-    (u): u is A => u instanceof ctor,
-    (u, c) =>
-      u instanceof ctor
-        ? t.success(u)
-        : pipe(
-            codec.validate(u, c),
-            either.map(d => new ctor(d)),
-          ),
-    o => o.value,
-  )
