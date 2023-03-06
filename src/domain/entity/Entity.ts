@@ -1,5 +1,4 @@
-import * as t from 'io-ts'
-import { Id, IdC } from '../value-object'
+import { Id } from '../value-object'
 
 export abstract class Entity<I extends Id> {
   readonly _type!: string
@@ -10,12 +9,6 @@ export abstract class Entity<I extends Id> {
     return that.constructor === this.constructor && that.id.equals(this.id)
   }
 }
-
-export const EntityC = <I extends Id>(idC: IdC<I>, type: string) =>
-  t.type({
-    _type: t.literal(type),
-    id: idC,
-  })
 
 export type TypeOf<E extends Entity<Id>> = E['_type']
 
