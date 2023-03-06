@@ -1,6 +1,7 @@
 import { CreatedAt } from './date-time/CreatedAt'
 import { DateTime, DateTimeFromCtorC } from './date-time/DateTime'
 import { DeletedAt } from './date-time/DeletedAt'
+import { OccurredAt } from './date-time/OccurredAt'
 import { UpdatedAt } from './date-time/UpdatedAt'
 import { Id, IdC } from './id/Id'
 import { IntegerId, IntegerIdC } from './id/IntegerId'
@@ -32,6 +33,7 @@ export {
   IntegerIdC,
   ObjectId,
   ObjectIdC,
+  OccurredAt,
   SignedNumber,
   StringId,
   StringIdC,
