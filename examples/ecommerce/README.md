@@ -1,7 +1,9 @@
 # E-commerce
+
 This is a simple example which makes use of the library.
 
 ## Installing dependencies
+
 This example has his own dependencies, like web server, database driver and so on.
 To install them run the following command:
 
@@ -10,6 +12,7 @@ npm i --no-save fastify pino mongodb
 ```
 
 ## Running the application
+
 Now it's time to start the application, but do that from the root of the project:
 
 ```shell
@@ -17,6 +20,7 @@ ts-node --project tsconfig.json examples/ecommerce/app/index.ts
 ```
 
 ## Do something
+
 This example exposes some API endpoints, let's try to call this one:
 
 ```shell
