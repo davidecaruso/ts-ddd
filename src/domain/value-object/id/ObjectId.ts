@@ -3,11 +3,11 @@ import * as t from 'io-ts'
 import { InvalidObjectIdGivenError } from '../../error'
 import { Id } from './Id'
 
-export abstract class ObjectId extends Id {
+export abstract class ObjectId implements Id {
+  abstract readonly _type: string
   private readonly value: ObjectID
 
   constructor(input?: string | ObjectID | ObjectId) {
-    super()
     try {
       this.value = input
         ? input instanceof ObjectID

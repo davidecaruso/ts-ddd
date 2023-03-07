@@ -5,7 +5,8 @@ import { NonEmptyString } from 'io-ts-types'
 import { InvalidStringIdGivenError } from '../../error'
 import { Id } from './Id'
 
-export abstract class StringId extends Id {
+export abstract class StringId implements Id {
+  abstract readonly _type: string
   private readonly value: NonEmptyString
 
   constructor(input: number | string | StringId) {
@@ -15,7 +16,6 @@ export abstract class StringId extends Id {
       throw new InvalidStringIdGivenError('The value must be a non-empty string')
     }
 
-    super()
     this.value = value.right
   }
 

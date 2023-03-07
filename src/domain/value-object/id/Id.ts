@@ -1,11 +1,11 @@
 import { ValueObject } from '../ValueObject'
 
-export abstract class Id implements ValueObject {
-  abstract readonly _type: string
+export interface Id extends ValueObject {
+  readonly _type: string
 
-  abstract equals(that: Id): boolean
+  equals(that: this): boolean
 
-  abstract toString(): string
+  toString(): string
 
-  abstract toRaw(): unknown
+  toRaw(): unknown
 }
