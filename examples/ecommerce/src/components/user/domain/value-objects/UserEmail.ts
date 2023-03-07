@@ -7,7 +7,7 @@ export class UserEmail implements ValueObject {
   constructor(input: string | UserEmail) {
     this._value = input instanceof UserEmail ? input.value : input
 
-    // TODO: Add email checks
+    // ...email checks
   }
 
   get value() {

@@ -5,7 +5,6 @@ import { ValueObject } from '../ValueObject'
 /**
  * TODO: make operations stricter about types
  */
-
 export abstract class AbstractNumber implements ValueObject {
   abstract readonly _type: string
   protected _value!: number
