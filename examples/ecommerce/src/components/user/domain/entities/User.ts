@@ -7,7 +7,7 @@ import { UserId } from '../value-objects/UserId'
 import { UserLastName } from '../value-objects/UserLastName'
 
 export class User extends AggregateRoot<UserId> {
-  readonly _type: string = 'user'
+  readonly _type = 'user'
   readonly updatedAt: UpdatedAt
 
   constructor(

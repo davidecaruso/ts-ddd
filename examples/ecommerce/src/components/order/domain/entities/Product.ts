@@ -6,7 +6,7 @@ import { ProductName } from '../value-objects/ProductName'
 import { ProductPrice } from '../value-objects/ProductPrice'
 
 export class Product extends Entity<ProductId> {
-  readonly _type: string = 'product'
+  readonly _type = 'product'
   readonly updatedAt: UpdatedAt
 
   constructor(
