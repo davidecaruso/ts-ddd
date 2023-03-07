@@ -1,25 +1,32 @@
 import * as t from 'io-ts'
-import { parse, stringify, v4 } from 'uuid'
+import { stringify, v4, parse } from 'uuid'
+import { InvalidUuidGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class Uuid extends Id {
-  private readonly bytes: ArrayLike<number>
+  private readonly value: string
 
   constructor(input?: string | Uuid) {
     super()
-    this.bytes = input instanceof Uuid ? input.bytes : undefined !== input ? parse(input) : v4(null, [])
+
+    try {
+      this.value =
+        input instanceof Uuid ? input.value : undefined !== input && parse(input) ? input : stringify(v4(null, []))
+    } catch (e) {
+      throw new InvalidUuidGivenError('The value must be a valid Uuid')
+    }
   }
 
-  equals(that: Id): boolean {
-    return that instanceof Uuid && that.constructor === this.constructor && that.toString() === this.toString()
+  equals(that: Uuid): boolean {
+    return that.constructor === this.constructor && that.toString() === this.toString()
   }
 
   toString(): string {
-    return stringify(this.bytes)
+    return this.value
   }
 
   toRaw(): unknown {
-    return this.bytes
+    return this.value
   }
 
   static get codec() {
