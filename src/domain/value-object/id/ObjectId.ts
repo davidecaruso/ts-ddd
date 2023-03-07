@@ -21,8 +21,8 @@ export abstract class ObjectId extends Id {
     }
   }
 
-  equals(that: Id): boolean {
-    return that instanceof ObjectId && that.constructor === this.constructor && that.value.equals(this.value)
+  equals(that: ObjectId): boolean {
+    return that.constructor === this.constructor && that.value.equals(this.value)
   }
 
   toString(): string {
