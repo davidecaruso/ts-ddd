@@ -63,6 +63,7 @@ describe('Uuid', () => {
         expect(FooId.codec.decode(uuid)).toStrictEqual(either.of(new FooId(uuid)))
         expect(FooId.codec.decode(uuid.toString())).toStrictEqual(either.of(new FooId(uuid)))
         expect(FooId.codec.decode(new FooId(uuid))).toStrictEqual(either.of(new FooId(uuid)))
+        expect(FooId.codec.decode('foo')._tag).toStrictEqual('Left')
       })
     })
 
