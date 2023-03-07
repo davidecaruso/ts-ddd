@@ -2,9 +2,13 @@ import { number } from 'fp-ts'
 import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
+/**
+ * TODO: make operations stricter about types
+ */
+
 export abstract class AbstractNumber implements ValueObject {
+  abstract readonly _type: string
   protected _value!: number
-  readonly _type!: string
 
   get value() {
     return this._value
