@@ -21,10 +21,10 @@ describe('Integer', () => {
 
       describe('with negative integer input argument', () => {
         it('should return a Foo instance', () => {
-          const sut = new Foo(42)
+          const sut = new Foo(-42)
 
           expect(sut._type).toStrictEqual('foo')
-          expect(sut.value).toStrictEqual(42)
+          expect(sut.value).toStrictEqual(-42)
         })
       })
     })
@@ -41,10 +41,10 @@ describe('Integer', () => {
 
       describe('with negative integer input argument', () => {
         it('should return a Foo instance', () => {
-          const sut = new Foo(`42`)
+          const sut = new Foo(`-42`)
 
           expect(sut._type).toStrictEqual('foo')
-          expect(sut.value).toStrictEqual(42)
+          expect(sut.value).toStrictEqual(-42)
         })
       })
     })
