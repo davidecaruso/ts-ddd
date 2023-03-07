@@ -1,11 +1,10 @@
 import { either } from 'fp-ts'
-import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
 import { NonEmptyString } from 'io-ts-types'
 import { InvalidStringIdGivenError } from '../../error'
 import { Id } from './Id'
 
-export abstract class StringId implements Id {
+export abstract class StringId extends Id {
   abstract readonly _type: string
   private readonly value: NonEmptyString
 
@@ -15,6 +14,8 @@ export abstract class StringId implements Id {
     if (either.isLeft(value)) {
       throw new InvalidStringIdGivenError('The value must be a non-empty string')
     }
+
+    super()
 
     this.value = value.right
   }
@@ -29,21 +30,5 @@ export abstract class StringId implements Id {
 
   toRaw(): unknown {
     return this.value
-  }
-
-  static get codec() {
-    return new t.Type(
-      this.name ?? StringId.name,
-      (u): u is typeof this => u instanceof this,
-      (u, c) => {
-        try {
-          // @ts-ignore
-          return t.success(new this(u as typeof this))
-        } catch (error) {
-          return t.failure(u, c)
-        }
-      },
-      o => o.toString(),
-    )
   }
 }

@@ -5,6 +5,10 @@ import { StringId } from './StringId'
 
 class FooId extends StringId {
   readonly _type = 'foo-id'
+
+  static codec() {
+    return super.codec(this)
+  }
 }
 
 describe('StringId', () => {
@@ -43,16 +47,16 @@ describe('StringId', () => {
   describe('codec', () => {
     describe('decode', () => {
       it('should either return an instance or not', () => {
-        expect(FooId.codec.decode('foo')).toStrictEqual(either.of(new FooId('foo')))
-        expect(FooId.codec.decode('foo')).toStrictEqual(either.of(new FooId('foo')))
-        expect(FooId.codec.decode(new FooId('foo'))).toStrictEqual(either.of(new FooId('foo')))
-        expect(FooId.codec.decode('')._tag).toStrictEqual('Left')
+        expect(FooId.codec().decode('foo')).toStrictEqual(either.of(new FooId('foo')))
+        expect(FooId.codec().decode('foo')).toStrictEqual(either.of(new FooId('foo')))
+        expect(FooId.codec().decode(new FooId('foo'))).toStrictEqual(either.of(new FooId('foo')))
+        expect(FooId.codec().decode('')._tag).toStrictEqual('Left')
       })
     })
 
     describe('encode', () => {
       it('should return the string value', () => {
-        expect(FooId.codec.encode(new FooId('foo'))).toStrictEqual('foo')
+        expect(FooId.codec().encode(new FooId('foo'))).toStrictEqual('foo')
       })
     })
 
@@ -62,8 +66,8 @@ describe('StringId', () => {
           readonly _type = 'bar-id'
         }
 
-        expect(FooId.codec.is(new FooId('foo'))).toBeTruthy()
-        expect(FooId.codec.is(new BarId(42))).toBeFalsy()
+        expect(FooId.codec().is(new FooId('foo'))).toBeTruthy()
+        expect(FooId.codec().is(new BarId(42))).toBeFalsy()
       })
     })
   })

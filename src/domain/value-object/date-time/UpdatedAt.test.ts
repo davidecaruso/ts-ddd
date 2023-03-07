@@ -56,11 +56,11 @@ describe('UpdatedAt', () => {
       it('should either return an instance or not', () => {
         const date = new Date()
 
-        expect(UpdatedAt.codec.decode(date)).toStrictEqual(either.of(new UpdatedAt(date)))
-        expect(UpdatedAt.codec.decode(date.toISOString())).toStrictEqual(either.of(new UpdatedAt(date)))
-        expect(UpdatedAt.codec.decode(new UpdatedAt(date))).toStrictEqual(either.of(new UpdatedAt(date)))
-        expect(UpdatedAt.codec.decode('foo')._tag).toStrictEqual('Left')
-        expect(UpdatedAt.codec.decode({ foo: 'bar' })._tag).toStrictEqual('Left')
+        expect(UpdatedAt.codec().decode(date)).toStrictEqual(either.of(new UpdatedAt(date)))
+        expect(UpdatedAt.codec().decode(date.toISOString())).toStrictEqual(either.of(new UpdatedAt(date)))
+        expect(UpdatedAt.codec().decode(new UpdatedAt(date))).toStrictEqual(either.of(new UpdatedAt(date)))
+        expect(UpdatedAt.codec().decode('foo')._tag).toStrictEqual('Left')
+        expect(UpdatedAt.codec().decode({ foo: 'bar' })._tag).toStrictEqual('Left')
       })
     })
 
@@ -68,14 +68,14 @@ describe('UpdatedAt', () => {
       it('should return the raw value', () => {
         const date = new Date()
 
-        expect(UpdatedAt.codec.encode(new UpdatedAt(date))).toStrictEqual(date)
+        expect(UpdatedAt.codec().encode(new UpdatedAt(date))).toStrictEqual(date)
       })
     })
 
     describe('is', () => {
       it('should check if instance or not', () => {
-        expect(UpdatedAt.codec.is(new UpdatedAt())).toBeTruthy()
-        expect(UpdatedAt.codec.is(new CreatedAt())).toBeFalsy()
+        expect(UpdatedAt.codec().is(new UpdatedAt())).toBeTruthy()
+        expect(UpdatedAt.codec().is(new CreatedAt())).toBeFalsy()
       })
     })
   })

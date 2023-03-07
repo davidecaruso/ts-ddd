@@ -4,7 +4,7 @@ import * as tt from 'io-ts-types'
 import { InvalidIntegerIdGivenError } from '../../error'
 import { Id } from './Id'
 
-export abstract class IntegerId implements Id {
+export abstract class IntegerId extends Id {
   abstract readonly _type: string
   protected readonly value: t.Int
 
@@ -15,6 +15,7 @@ export abstract class IntegerId implements Id {
       throw new InvalidIntegerIdGivenError('The value must be an integer or an integer-like string')
     }
 
+    super()
     this.value = value.right
   }
 
@@ -28,21 +29,5 @@ export abstract class IntegerId implements Id {
 
   toRaw(): unknown {
     return this.value
-  }
-
-  static get codec() {
-    return new t.Type(
-      this.name ?? 'IntegerId',
-      (u): u is typeof this => u instanceof this,
-      (u, c) => {
-        try {
-          // @ts-ignore
-          return t.success(new this(u as typeof this))
-        } catch (error) {
-          return t.failure(u, c)
-        }
-      },
-      o => o.toRaw(),
-    )
   }
 }

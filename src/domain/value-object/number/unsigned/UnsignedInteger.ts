@@ -23,20 +23,4 @@ export abstract class UnsignedInteger extends UnsignedNumber {
   equals(that: UnsignedNumber): boolean {
     return that instanceof UnsignedInteger && that.constructor === this.constructor && that.value === this.value
   }
-
-  static get codec() {
-    return new t.Type(
-      this.name ?? UnsignedInteger.name,
-      (u): u is typeof this => u instanceof this,
-      (u, c) => {
-        try {
-          // @ts-ignore
-          return t.success(new this(u as typeof this))
-        } catch (error) {
-          return t.failure(u, c)
-        }
-      },
-      o => o.value,
-    )
-  }
 }

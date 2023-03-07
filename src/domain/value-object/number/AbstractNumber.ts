@@ -42,4 +42,19 @@ export abstract class AbstractNumber implements ValueObject {
   }
 
   abstract equals<N extends this>(that: N): boolean
+
+  protected static codec<A extends AbstractNumber>(ctor: new (i: any) => A) {
+    return new t.Type(
+      this.name ?? AbstractNumber.name,
+      (u): u is A => u instanceof ctor,
+      (u, c) => {
+        try {
+          return u instanceof this ? t.success(u) : t.success(new ctor(u))
+        } catch (error) {
+          return t.failure(u, c)
+        }
+      },
+      o => o.value,
+    )
+  }
 }

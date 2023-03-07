@@ -46,11 +46,11 @@ describe('DeletedAt', () => {
       it('should either return an instance or not', () => {
         const date = new Date()
 
-        expect(DeletedAt.codec.decode(date)).toStrictEqual(either.of(new DeletedAt(date)))
-        expect(DeletedAt.codec.decode(date.toISOString())).toStrictEqual(either.of(new DeletedAt(date)))
-        expect(DeletedAt.codec.decode(new DeletedAt(date))).toStrictEqual(either.of(new DeletedAt(date)))
-        expect(DeletedAt.codec.decode('foo')._tag).toStrictEqual('Left')
-        expect(DeletedAt.codec.decode({ foo: 'bar' })._tag).toStrictEqual('Left')
+        expect(DeletedAt.codec().decode(date)).toStrictEqual(either.of(new DeletedAt(date)))
+        expect(DeletedAt.codec().decode(date.toISOString())).toStrictEqual(either.of(new DeletedAt(date)))
+        expect(DeletedAt.codec().decode(new DeletedAt(date))).toStrictEqual(either.of(new DeletedAt(date)))
+        expect(DeletedAt.codec().decode('foo')._tag).toStrictEqual('Left')
+        expect(DeletedAt.codec().decode({ foo: 'bar' })._tag).toStrictEqual('Left')
       })
     })
 
@@ -58,14 +58,14 @@ describe('DeletedAt', () => {
       it('should return the raw value', () => {
         const date = new Date()
 
-        expect(DeletedAt.codec.encode(new DeletedAt(date))).toStrictEqual(date)
+        expect(DeletedAt.codec().encode(new DeletedAt(date))).toStrictEqual(date)
       })
     })
 
     describe('is', () => {
       it('should check if instance or not', () => {
-        expect(DeletedAt.codec.is(new DeletedAt())).toBeTruthy()
-        expect(DeletedAt.codec.is(new UpdatedAt())).toBeFalsy()
+        expect(DeletedAt.codec().is(new DeletedAt())).toBeTruthy()
+        expect(DeletedAt.codec().is(new UpdatedAt())).toBeFalsy()
       })
     })
   })
