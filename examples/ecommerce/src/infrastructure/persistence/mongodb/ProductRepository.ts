@@ -25,7 +25,7 @@ export class ProductRepository extends MongoDbRepositoryAdapter<Product> impleme
           e => new Error(`Unable to read user: ${JSON.stringify(e)}`),
         ),
       ),
-      taskEither.chainEitherKW(flow(t.readonlyArray(Product.codec).decode)),
+      taskEither.chainEitherKW(flow(t.readonlyArray(Product.codec()).decode)),
       taskEither.map(x => x as any),
       taskEither.mapLeft(e => new Error(e as any)),
       taskEither.chainFirstW(() => this.close()),

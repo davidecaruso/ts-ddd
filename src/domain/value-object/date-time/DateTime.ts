@@ -29,16 +29,17 @@ export abstract class DateTime implements ValueObject {
     return this._value.toISOString().substring(0, 10)
   }
 
-  protected static codec<A extends DateTime>(ctor: new (i: any) => A) {
+  protected static codec() {
     return new t.Type(
       this.name ?? DateTime.name,
-      (u): u is A => u instanceof ctor,
+      (u): u is typeof this => u instanceof this,
       (u, c) =>
         u instanceof this
           ? t.success(u)
           : pipe(
               t.union([tt.date, tt.DateFromISOString]).validate(u, c),
-              either.map(d => new ctor(d)),
+              // @ts-ignore
+              either.map(d => new this(d)),
             ),
       o => o.value,
     )

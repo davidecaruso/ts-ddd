@@ -31,7 +31,7 @@ export class OrderRepository extends MongoDbRepositoryAdapter<Order> implements 
           ),
         ),
       ),
-      taskEither.chainEitherKW(flow(t.union([t.null, Order.codec]).decode)),
+      taskEither.chainEitherKW(flow(t.union([t.null, Order.codec()]).decode)),
       taskEither.map(option.fromNullable),
       taskEither.map(x => x as any),
       taskEither.mapLeft(e => new Error(e as any)),

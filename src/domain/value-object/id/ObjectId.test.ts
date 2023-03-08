@@ -8,7 +8,7 @@ class FooId extends ObjectId {
   readonly _type = 'foo-id'
 
   static codec() {
-    return super.codec(this)
+    return super.codec()
   }
 }
 

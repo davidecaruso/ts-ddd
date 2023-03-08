@@ -15,12 +15,12 @@ export interface PlaceOrderCommand extends Command {
 
 export const PlaceOrderCommand = t.type(
   {
-    userId: UserId.codec,
+    userId: UserId.codec(),
     products: tt.readonlyNonEmptyArray(
       t.type(
         {
-          id: ProductId.codec,
-          quantity: ProductQuantity.codec,
+          id: ProductId.codec(),
+          quantity: ProductQuantity.codec(),
         },
         'PlaceOrderCommand<Product>',
       ),

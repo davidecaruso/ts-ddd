@@ -17,6 +17,7 @@ export abstract class SignedNumber extends AbstractNumber {
     }
 
     super()
+
     this.value = value.right
   }
 }

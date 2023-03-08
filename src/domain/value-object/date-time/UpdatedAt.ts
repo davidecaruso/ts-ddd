@@ -5,7 +5,7 @@ export class UpdatedAt extends DateTime {
   readonly _type = 'updated-at'
 
   static codec() {
-    return super.codec(this)
+    return super.codec()
   }
 
   static fromCreatedAt(createdAt: CreatedAt): UpdatedAt {

@@ -1,7 +1,7 @@
 import { UnsignedDecimal } from '../../../../../../../src/domain/value-object'
 
 export class OrderTotal extends UnsignedDecimal {
-  protected _value!: number
+  readonly _type = 'order-total'
 
   get value() {
     return this._value

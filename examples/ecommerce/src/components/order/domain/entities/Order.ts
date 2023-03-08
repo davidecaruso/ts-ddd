@@ -76,7 +76,7 @@ export class Order extends AggregateRoot<OrderId> {
     return order
   }
 
-  static get codec() {
+  static codec() {
     return t.type({})
   }
 }

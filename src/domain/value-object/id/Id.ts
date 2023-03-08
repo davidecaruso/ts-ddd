@@ -10,13 +10,16 @@ export abstract class Id implements ValueObject {
 
   abstract toRaw(): unknown
 
-  protected static codec<A extends Id>(ctor: new (i: any) => A) {
+  protected static codec() {
     return new t.Type(
       this.name ?? Id.name,
-      (u): u is A => u instanceof ctor,
+      (u): u is typeof this => u instanceof this,
       (u, c) => {
         try {
-          return u instanceof this ? t.success(u) : t.success(new ctor(u))
+          return u instanceof this
+            ? t.success(u)
+            : // @ts-ignore
+              t.success(new this(u))
         } catch (error) {
           return t.failure(u, c)
         }

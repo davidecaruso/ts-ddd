@@ -20,7 +20,7 @@ export class Product extends Entity<ProductId> {
     this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
   }
 
-  static get codec() {
-    return t.type({ id: ProductId.codec })
+  static codec() {
+    return t.type({ id: ProductId.codec() })
   }
 }

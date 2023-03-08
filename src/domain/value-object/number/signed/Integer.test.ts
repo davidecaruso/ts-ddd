@@ -7,7 +7,7 @@ class Foo extends Integer {
   readonly _type = 'foo'
 
   static codec() {
-    return super.codec(this)
+    return super.codec()
   }
 }
 

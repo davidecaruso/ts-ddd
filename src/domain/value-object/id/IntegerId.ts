@@ -16,6 +16,7 @@ export abstract class IntegerId extends Id {
     }
 
     super()
+
     this.value = value.right
   }
 
