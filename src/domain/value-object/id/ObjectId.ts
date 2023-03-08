@@ -22,10 +22,6 @@ export abstract class ObjectId extends Id {
     }
   }
 
-  equals(that: ObjectId): boolean {
-    return that.constructor === this.constructor && that.value.equals(this.value)
-  }
-
   toString(): string {
     return this.value.toString()
   }

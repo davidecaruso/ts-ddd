@@ -55,5 +55,11 @@ export abstract class AbstractNumber implements ValueObject {
     )
   }
 
-  abstract equals<N extends this>(that: N): boolean
+  equals<N extends this>(that: N): boolean {
+    return that.value === this.value
+  }
+
+  strictEquals<N extends this>(that: N): boolean {
+    return that._type === this._type && that.value === this.value
+  }
 }

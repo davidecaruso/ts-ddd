@@ -20,10 +20,6 @@ export abstract class IntegerId extends Id {
     this.value = value.right
   }
 
-  equals(that: IntegerId): boolean {
-    return that.constructor === this.constructor && that.value === this.value
-  }
-
   toString(): string {
     return this.value.toString()
   }

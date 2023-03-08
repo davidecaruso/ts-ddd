@@ -19,8 +19,4 @@ export abstract class UnsignedInteger extends UnsignedNumber {
 
     super(value.right)
   }
-
-  equals(that: UnsignedNumber): boolean {
-    return that instanceof UnsignedInteger && that.constructor === this.constructor && that.value === this.value
-  }
 }

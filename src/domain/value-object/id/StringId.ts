@@ -20,10 +20,6 @@ export abstract class StringId extends Id {
     this.value = value.right
   }
 
-  equals(that: StringId): boolean {
-    return that.constructor === this.constructor && that.value === this.value
-  }
-
   toString(): string {
     return this.value
   }

@@ -17,10 +17,6 @@ export abstract class Uuid extends Id {
     }
   }
 
-  equals(that: Uuid): boolean {
-    return that.constructor === this.constructor && that.toString() === this.toString()
-  }
-
   toString(): string {
     return this.value
   }

@@ -4,8 +4,6 @@ import { ValueObject } from '../ValueObject'
 export abstract class Id implements ValueObject {
   readonly _type!: string
 
-  abstract equals(that: this): boolean
-
   abstract toString(): string
 
   abstract toRaw(): unknown
@@ -26,5 +24,13 @@ export abstract class Id implements ValueObject {
       },
       o => o.toRaw(),
     )
+  }
+
+  equals<I extends this>(that: I): boolean {
+    return that.toString() === this.toString()
+  }
+
+  strictEquals<I extends this>(that: I): boolean {
+    return that._type === this._type && that.toString() === this.toString()
   }
 }

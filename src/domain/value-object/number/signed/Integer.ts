@@ -14,8 +14,4 @@ export abstract class Integer extends SignedNumber {
 
     super(value.right)
   }
-
-  equals(that: SignedNumber): boolean {
-    return that instanceof Integer && that.constructor === this.constructor && that.value === this.value
-  }
 }

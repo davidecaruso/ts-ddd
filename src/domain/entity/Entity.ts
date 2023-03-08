@@ -6,7 +6,7 @@ export abstract class Entity<I extends Id> {
   constructor(readonly id: I) {}
 
   equals(that: this): boolean {
-    return that.constructor === this.constructor && that.id.equals(this.id)
+    return that._type === this._type && that.id.equals(this.id)
   }
 }
 
