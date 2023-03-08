@@ -5,8 +5,8 @@ import * as tt from 'io-ts-types'
 import { ValueObject } from '../index'
 
 export abstract class DateTime implements ValueObject {
+  abstract readonly _type: string
   protected readonly _value: Date
-  readonly _type!: string
 
   constructor(input: string | Date | DateTime = new Date()) {
     this._value =

@@ -38,9 +38,8 @@ export class Order extends AggregateRoot<OrderId> {
   get total(): OrderTotal {
     return pipe(
       this.products,
-      readonlyNonEmptyArray.reduce(new OrderTotal(0), (total, { id, price, quantity }) =>
-        total.add(price.value * quantity.value),
-      ),
+      readonlyNonEmptyArray.reduce(0, (total, { id, price, quantity }) => price.value * quantity.value),
+      total => new OrderTotal(total),
     )
   }
 

@@ -1,7 +1,7 @@
 import { Id } from '../value-object'
 
 export abstract class Entity<I extends Id> {
-  readonly _type!: string
+  abstract readonly _type: string
 
   constructor(readonly id: I) {}
 

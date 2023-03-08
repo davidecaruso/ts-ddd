@@ -2,7 +2,7 @@ import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
 export abstract class Id implements ValueObject {
-  readonly _type!: string
+  abstract readonly _type: string
 
   abstract toString(): string
 
