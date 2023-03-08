@@ -1,10 +1,6 @@
-import { number } from 'fp-ts'
 import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
-/**
- * TODO: make operations stricter about types
- */
 export abstract class AbstractNumber implements ValueObject {
   abstract readonly _type: string
   protected _value!: number
@@ -17,31 +13,29 @@ export abstract class AbstractNumber implements ValueObject {
     this._value = n
   }
 
-  add<N extends this | number>(n: N): this {
-    this._value = number.MonoidSum.concat(this._value, t.number.is(n) ? n : n.value)
+  add<N extends this>(n: N): this {
+    this._value = this._value + n.value
 
     return this
   }
 
-  sub<N extends this | number>(n: N): this {
-    this._value = number.MagmaSub.concat(this._value, t.number.is(n) ? n : n.value)
+  sub<N extends this>(n: N): this {
+    this._value = this._value - n.value
 
     return this
   }
 
-  mul<N extends this | number>(n: N): this {
-    this._value = number.MonoidProduct.concat(this._value, t.number.is(n) ? n : n.value)
+  mul<N extends this>(n: N): this {
+    this._value = this._value * n.value
 
     return this
   }
 
-  div<N extends this | number>(n: N): this {
-    this._value = this._value / (t.number.is(n) ? n : n.value)
+  div<N extends this>(n: N): this {
+    this._value = this._value / n.value
 
     return this
   }
-
-  abstract equals<N extends this>(that: N): boolean
 
   protected static codec() {
     return new t.Type(
@@ -60,4 +54,6 @@ export abstract class AbstractNumber implements ValueObject {
       o => o.value,
     )
   }
+
+  abstract equals<N extends this>(that: N): boolean
 }

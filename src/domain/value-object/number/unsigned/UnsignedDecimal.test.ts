@@ -112,7 +112,6 @@ describe('UnsignedDecimal', () => {
 
   describe('add', () => {
     it('should add a value to the original value', () => {
-      expect(new Foo(42).add(42).value).toStrictEqual(84)
       expect(new Foo(42).add(new Foo(42)).value).toStrictEqual(84)
       expect(new Foo(42).add(new Foo(0.42)).value).toStrictEqual(42.42)
     })
@@ -120,21 +119,18 @@ describe('UnsignedDecimal', () => {
 
   describe('sub', () => {
     it('should sub a value to the original value', () => {
-      expect(new Foo(42).sub(42).value).toStrictEqual(0)
       expect(new Foo(42).sub(new Foo(42)).value).toStrictEqual(0)
     })
   })
 
   describe('mul', () => {
     it('should mul a value to the original value', () => {
-      expect(new Foo(42).mul(42).value).toStrictEqual(1764)
       expect(new Foo(42).mul(new Foo(42)).value).toStrictEqual(1764)
     })
   })
 
   describe('div', () => {
     it('should div a value to the original value', () => {
-      expect(new Foo(42).div(42).value).toStrictEqual(1)
       expect(new Foo(42).div(new Foo(42)).value).toStrictEqual(1)
       expect(new Foo(42).div(new Foo(84)).value).toStrictEqual(0.5)
     })
