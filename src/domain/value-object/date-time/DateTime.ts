@@ -2,7 +2,7 @@ import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import * as t from 'io-ts'
 import * as tt from 'io-ts-types'
-import { ValueObject } from '../index'
+import { ValueObject } from '../ValueObject'
 
 export abstract class DateTime implements ValueObject {
   abstract readonly _type: string
