@@ -1,4 +1,4 @@
-import { CommandHandler } from './command/CommandHandler'
-import { QueryHandler } from './query/QueryHandler'
+import { CommandHandler } from './CommandHandler'
+import { QueryHandler } from './QueryHandler'
 
 export { CommandHandler, QueryHandler }
