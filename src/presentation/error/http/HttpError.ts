@@ -1,6 +1,7 @@
 /**
  * @see https://www.rfc-editor.org/rfc/rfc7807
  * @see https://www.rfc-editor.org/rfc/rfc7231#section-6
+ * @see https://github.com/Microsoft/TypeScript-wiki/blob/main/Breaking-Changes.md#extending-built-ins-like-error-array-and-map-may-no-longer-work
  */
 export abstract class HttpError extends Error {
   abstract readonly _type: string
@@ -16,6 +17,8 @@ export abstract class HttpError extends Error {
     readonly type?: string,
   ) {
     super(detail ? `${title}: ${detail}` : title)
+
+    Object.setPrototypeOf(this, HttpError.prototype)
   }
 
   toJson() {
