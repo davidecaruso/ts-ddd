@@ -2,12 +2,11 @@ import { taskEither } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import { TaskEither } from 'fp-ts/TaskEither'
 import { MongoClient } from 'mongodb'
-import { Logger } from '../../../../../../src/application/logging'
-import { Repository } from '../../../../../../src/application/persistence'
-import { Entity } from '../../../../../../src/domain/entity'
-import { Id } from '../../../../../../src/domain/value-object'
+import { application, domain } from '../../../../../../src'
 
-export abstract class MongoDbRepositoryAdapter<A extends Entity<Id>> extends Repository<A> {
+export abstract class MongoDbRepositoryAdapter<
+  A extends domain.entity.Entity<domain.valueObject.Id>,
+> extends application.persistence.Repository<A> {
   protected abstract collectionName: string
 
   private _client: MongoClient | undefined
@@ -16,7 +15,7 @@ export abstract class MongoDbRepositoryAdapter<A extends Entity<Id>> extends Rep
     return this._client ? taskEither.of(this._client) : this.connect()
   }
 
-  constructor(protected readonly connectionUri: string, protected logger?: Logger) {
+  constructor(protected readonly connectionUri: string, protected logger?: application.logging.Logger) {
     super(logger)
   }
 

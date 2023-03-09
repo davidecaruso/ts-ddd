@@ -2,7 +2,7 @@ import { EventEmitter } from 'events'
 import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import pino from 'pino'
-import { DomainEvent } from '../../../src/domain/event'
+import { domain } from '../../../src'
 import { OrderCreatedEvent } from '../src/components/order/domain/events/OrderCreatedEvent'
 import { PinoLoggerAdapter } from '../src/infrastructure/logging/PinoLoggerAdapter'
 import server from '../src/presentation/server'
@@ -25,7 +25,7 @@ app.eventPublisher.listen<OrderCreatedEvent>('order-created', async event => {
     `Event listened: ${JSON.stringify({
       id: event.id,
       type: event._type,
-      ...(event instanceof DomainEvent && {
+      ...(event instanceof domain.event.DomainEvent && {
         layer: 'domain',
         aggregateId: event._aggregateId,
         aggregateType: event._aggregateType,

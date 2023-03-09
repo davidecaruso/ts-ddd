@@ -3,7 +3,7 @@ import { flow, pipe } from 'fp-ts/function'
 import { Option } from 'fp-ts/Option'
 import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
-import { IdOf } from '../../../../../../src/domain/entity'
+import { domain } from '../../../../../../src'
 import { UserRepository as IUserRepository } from '../../../components/user/application/repositories/UserRepository'
 import { User } from '../../../components/user/domain/entities/User'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
@@ -11,11 +11,11 @@ import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 export class UserRepository extends MongoDbRepositoryAdapter<User> implements IUserRepository {
   protected collectionName: string = 'users'
 
-  readManyById(ids: ReadonlyArray<IdOf<User>>): TaskEither<Error, ReadonlyArray<User>> {
+  readManyById(ids: ReadonlyArray<domain.entity.IdOf<User>>): TaskEither<Error, ReadonlyArray<User>> {
     throw new Error('Method not implemented')
   }
 
-  readOneById(id: IdOf<User>): TaskEither<Error, Option<User>> {
+  readOneById(id: domain.entity.IdOf<User>): TaskEither<Error, Option<User>> {
     return pipe(
       id,
       taskEither.of,

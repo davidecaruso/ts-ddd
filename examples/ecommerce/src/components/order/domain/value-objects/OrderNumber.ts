@@ -1,6 +1,6 @@
-import { ValueObject } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class OrderNumber implements ValueObject {
+export class OrderNumber implements domain.valueObject.ValueObject {
   private readonly _value: string
   readonly _type = 'order-number'
 

@@ -1,4 +1,4 @@
-import { Repository } from '../../../../../../../src/application/persistence'
+import { application } from '../../../../../../../src'
 import { User } from '../../domain/entities/User'
 
-export interface UserRepository extends Repository<User> {}
+export interface UserRepository extends application.persistence.Repository<User> {}

@@ -1,3 +1,5 @@
-import { UnsignedDecimal } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class ProductPrice extends UnsignedDecimal {}
+export class ProductPrice extends domain.valueObject.UnsignedDecimal {
+  readonly _type = 'product-price'
+}

@@ -1,5 +1,5 @@
-import { ObjectId } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class EventId extends ObjectId {
+export class EventId extends domain.valueObject.ObjectId {
   readonly _type = 'event-id'
 }

@@ -1,9 +1,7 @@
 import { either, readerTaskEither, readonlyArray, readonlyNonEmptyArray } from 'fp-ts'
 import { flow, pipe } from 'fp-ts/function'
 import { ReaderTaskEither } from 'fp-ts/ReaderTaskEither'
-import { CommandHandler } from '../../../../../../../src/application/handler'
-import { Logger } from '../../../../../../../src/application/logging'
-import { EventPublisher } from '../../../../../../../src/application/event'
+import { application } from '../../../../../../../src'
 import { UserRepository } from '../../../user/application/repositories/UserRepository'
 import { Order } from '../../domain/entities/Order'
 import { Product } from '../../domain/entities/Product'
@@ -13,14 +11,14 @@ import { OrderRepository } from '../repositories/OrderRepository'
 import { ProductRepository } from '../repositories/ProductRepository'
 
 type Dependencies = {
-  logger?: Logger
-  eventPublisher: EventPublisher
+  logger?: application.logging.Logger
+  eventPublisher: application.event.EventPublisher
   userRepository: UserRepository
   orderRepository: OrderRepository
   productRepository: ProductRepository
 }
 
-export const PlaceOrderCommandHandler: CommandHandler<
+export const PlaceOrderCommandHandler: application.handler.CommandHandler<
   PlaceOrderCommand,
   ReaderTaskEither<Dependencies, Error, Order>
 > = command =>

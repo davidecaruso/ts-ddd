@@ -1,23 +1,22 @@
 import * as t from 'io-ts'
-import { Entity } from '../../../../../../../src/domain/entity'
-import { CreatedAt, UpdatedAt } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 import { ProductId } from '../value-objects/ProductId'
 import { ProductName } from '../value-objects/ProductName'
 import { ProductPrice } from '../value-objects/ProductPrice'
 
-export class Product extends Entity<ProductId> {
+export class Product extends domain.entity.Entity<ProductId> {
   readonly _type = 'product'
-  readonly updatedAt: UpdatedAt
+  readonly updatedAt: domain.valueObject.UpdatedAt
 
   constructor(
     readonly name: ProductName,
     readonly price: ProductPrice,
     readonly id: ProductId = new ProductId(),
-    readonly createdAt: CreatedAt = new CreatedAt(),
-    updatedAt?: UpdatedAt,
+    readonly createdAt: domain.valueObject.CreatedAt = new domain.valueObject.CreatedAt(),
+    updatedAt?: domain.valueObject.UpdatedAt,
   ) {
     super(id)
-    this.updatedAt = updatedAt ?? UpdatedAt.fromCreatedAt(createdAt)
+    this.updatedAt = updatedAt ?? domain.valueObject.UpdatedAt.fromCreatedAt(createdAt)
   }
 
   static codec() {

@@ -1,3 +1,3 @@
-import { DomainError } from '../../../../../../../src/domain/error'
+import { domain } from '../../../../../../../src'
 
-export class EmptyOrderError extends DomainError {}
+export class EmptyOrderError extends domain.error.DomainError {}

@@ -1,6 +1,6 @@
-import { UnsignedInteger } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class ProductQuantity extends UnsignedInteger {
+export class ProductQuantity extends domain.valueObject.UnsignedInteger {
   readonly _type = 'product-quantity'
 
   static codec() {

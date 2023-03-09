@@ -4,7 +4,7 @@ import { Option } from 'fp-ts/Option'
 import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
 import { ObjectId } from 'mongodb'
-import { IdOf } from '../../../../../../src/domain/entity'
+import { domain } from '../../../../../../src'
 import { ProductRepository as IProductRepository } from '../../../components/order/application/repositories/ProductRepository'
 import { Product } from '../../../components/order/domain/entities/Product'
 import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
@@ -12,7 +12,7 @@ import { MongoDbRepositoryAdapter } from './MongoDbRepositoryAdapter'
 export class ProductRepository extends MongoDbRepositoryAdapter<Product> implements IProductRepository {
   protected collectionName: string = 'products'
 
-  readManyById(ids: ReadonlyArray<IdOf<Product>>): TaskEither<Error, ReadonlyArray<Product>> {
+  readManyById(ids: ReadonlyArray<domain.entity.IdOf<Product>>): TaskEither<Error, ReadonlyArray<Product>> {
     return pipe(
       this.client,
       taskEither.chain(connection =>
@@ -32,7 +32,7 @@ export class ProductRepository extends MongoDbRepositoryAdapter<Product> impleme
     )
   }
 
-  readOneById(id: IdOf<Product>): TaskEither<Error, Option<Product>> {
+  readOneById(id: domain.entity.IdOf<Product>): TaskEither<Error, Option<Product>> {
     throw new Error('Method not implemented')
   }
 

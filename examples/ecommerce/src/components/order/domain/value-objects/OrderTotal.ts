@@ -1,6 +1,6 @@
-import { UnsignedDecimal } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class OrderTotal extends UnsignedDecimal {
+export class OrderTotal extends domain.valueObject.UnsignedDecimal {
   readonly _type = 'order-total'
 
   get value() {

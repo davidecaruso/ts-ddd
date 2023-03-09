@@ -1,8 +1,8 @@
-import { ValueObject } from '../../../../../../../src/domain/value-object'
+import { domain } from '../../../../../../../src'
 
-export class UserEmail implements ValueObject {
-  private readonly _value: string
+export class UserEmail implements domain.valueObject.ValueObject {
   readonly _type = 'user-email'
+  private readonly _value: string
 
   constructor(input: string | UserEmail) {
     this._value = input instanceof UserEmail ? input.value : input

@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
-import { BadRequestError, InternalServerError } from '../../../../../src/presentation/error'
+import { presentation } from '../../../../../src'
 import { AppInstance } from '../../../app/app'
 import { PlaceOrderCommand } from '../../components/order/application/commands/PlaceOrderCommand'
 import { PlaceOrderCommandHandler } from '../../components/order/application/handlers/PlaceOrderCommandHandler'
@@ -10,7 +10,7 @@ export default (app: AppInstance) => async (request: FastifyRequest, reply: Fast
   const command = pipe(
     request.body,
     PlaceOrderCommand.decode,
-    either.mapLeft(e => new BadRequestError('Some date is invalid', e.toString())),
+    either.mapLeft(e => new presentation.error.BadRequestError('Some date is invalid', e.toString())),
   )
 
   if (either.isLeft(command)) {
@@ -27,7 +27,9 @@ export default (app: AppInstance) => async (request: FastifyRequest, reply: Fast
       productRepository: app.productRepository,
       userRepository: app.userRepository,
     })(),
-    either.mapLeft(e => new InternalServerError('There was an error during order creation', e.toString())),
+    either.mapLeft(
+      e => new presentation.error.InternalServerError('There was an error during order creation', e.toString()),
+    ),
   )
 
   if (either.isLeft(result)) {
