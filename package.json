@@ -24,7 +24,8 @@
     "build": "tsc --build",
     "lint": "eslint --fix-dry-run ./",
     "lint:fix": "eslint --fix ./",
-    "pretty": "prettier --write ./",
+    "pretty": "prettier --check ./",
+    "pretty:fix": "prettier --write ./",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },

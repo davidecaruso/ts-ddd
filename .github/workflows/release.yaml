@@ -1,0 +1,27 @@
+name: release
+on:
+  release:
+    types: [published]
+jobs:
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone repository
+        uses: actions/checkout@v3
+
+      - name: set node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          registry-url: https://registry.npmjs.org
+
+      - name: install dependencies
+        run: npm install
+
+      - name: build package
+        run: npm run build
+
+      - name: publish to registry
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
