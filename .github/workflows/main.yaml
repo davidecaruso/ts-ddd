@@ -41,8 +41,10 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: install dependencies
-      - run: npm install
-      - run: npm i @types/bson @types/uuid bson uuid
+        run: npm install
+
+      - name: install peer dependencies
+        run: npm i @types/bson @types/uuid bson uuid
 
       - name: run test
         run: npm run test
@@ -93,8 +95,10 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: install dependencies
-      - run: npm install
-      - run: npm i @types/bson @types/uuid bson uuid
+        run: npm install
+
+      - name: install peer dependencies
+        run: npm i @types/bson @types/uuid bson uuid
 
       - name: build
         run: npm run build
