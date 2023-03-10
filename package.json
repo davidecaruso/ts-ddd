@@ -2,7 +2,23 @@
   "name": "ddd.ts",
   "version": "0.0.0",
   "description": "Amazing DDD tools and where to find them",
+  "license": "MIT",
   "main": "lib/index.js",
+  "author": "Davide Caruso <davide.caruso93@gmail.com>",
+  "homepage": "https://github.com/davidecaruso/ddd.ts",
+  "repository": "git+https://github.com/davidecaruso/ddd.ts.git",
+  "bugs": {
+    "url": "https://github.com/davidecaruso/ddd.ts/issues"
+  },
+  "keywords": [
+    "ddd",
+    "ddd.ts",
+    "cqrs",
+    "typescript",
+    "typescript-library",
+    "ddd-architecture",
+    "hexagonal-architecture"
+  ],
   "scripts": {
     "build": "tsc --build",
     "lint": "eslint --fix-dry-run ./",
@@ -11,9 +27,6 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "author": "Davide Caruso <davide.caruso93@gmail.com>",
-  "repository": "git+https://github.com/davidecaruso/ddd.ts.git",
-  "license": "MIT",
   "dependencies": {
     "fp-ts": "^2.12.3",
     "io-ts": "^2.2.19",
