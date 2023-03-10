@@ -1,10 +1,12 @@
 import { domain } from '../../../../../../../src'
 
-export class OrderNumber implements domain.valueObject.ValueObject {
-  private readonly _value: string
+export class OrderNumber extends domain.valueObject.ValueObject {
   readonly _type = 'order-number'
+  private readonly _value: string
 
   constructor(input: string | OrderNumber) {
+    super()
+
     this._value = input instanceof OrderNumber ? input.value : input
   }
 

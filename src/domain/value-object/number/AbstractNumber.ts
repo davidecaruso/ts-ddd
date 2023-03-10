@@ -1,8 +1,7 @@
 import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
-export abstract class AbstractNumber implements ValueObject {
-  abstract readonly _type: string
+export abstract class AbstractNumber extends ValueObject {
   protected _value!: number
 
   get value() {
@@ -56,10 +55,6 @@ export abstract class AbstractNumber implements ValueObject {
   }
 
   equals<N extends this>(that: N): boolean {
-    return that.value === this.value
-  }
-
-  strictEquals<N extends this>(that: N): boolean {
     return that._type === this._type && that.value === this.value
   }
 }

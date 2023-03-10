@@ -5,7 +5,6 @@ import { InvalidStringIdGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class StringId extends Id {
-  abstract readonly _type: string
   private readonly value: NonEmptyString
 
   constructor(input: number | string | StringId) {

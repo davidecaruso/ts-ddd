@@ -3,7 +3,6 @@ import { InvalidUuidGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class Uuid extends Id {
-  abstract readonly _type: string
   private readonly value: string
 
   constructor(input?: string | Uuid) {

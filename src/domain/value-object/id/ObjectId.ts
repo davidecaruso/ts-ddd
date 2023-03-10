@@ -3,7 +3,6 @@ import { InvalidObjectIdGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class ObjectId extends Id {
-  abstract readonly _type: string
   private readonly value: ObjectID
 
   constructor(input?: string | ObjectID | ObjectId) {

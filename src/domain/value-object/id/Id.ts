@@ -1,9 +1,7 @@
 import * as t from 'io-ts'
 import { ValueObject } from '../ValueObject'
 
-export abstract class Id implements ValueObject {
-  abstract readonly _type: string
-
+export abstract class Id extends ValueObject {
   abstract toString(): string
 
   abstract toRaw(): unknown
@@ -27,10 +25,6 @@ export abstract class Id implements ValueObject {
   }
 
   equals<I extends this>(that: I): boolean {
-    return that.toString() === this.toString()
-  }
-
-  strictEquals<I extends this>(that: I): boolean {
     return that._type === this._type && that.toString() === this.toString()
   }
 }

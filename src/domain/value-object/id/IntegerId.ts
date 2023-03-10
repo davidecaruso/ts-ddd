@@ -5,7 +5,6 @@ import { InvalidIntegerIdGivenError } from '../../error'
 import { Id } from './Id'
 
 export abstract class IntegerId extends Id {
-  abstract readonly _type: string
   protected readonly value: t.Int
 
   constructor(input: number | string | IntegerId) {
