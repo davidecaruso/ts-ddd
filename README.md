@@ -1,22 +1,22 @@
-# ddd.ts
+# ts-ddd
 
 > Amazing **DDD** tools and where to find them
 
 <p align="center">
 
-[![npm version](https://img.shields.io/npm/v/ddd.ts.svg)](https://www.npmjs.com/package/ddd.ts)
-[![npm downloads](https://img.shields.io/npm/dm/ddd.ts.svg)](https://www.npmjs.com/package/ddd.ts)
-[![Workflow Status](https://github.com/davidecaruso/ddd.ts/actions/workflows/main.yaml/badge.svg)](https://github.com/davidecaruso/ddd.ts/actions)
-[![Coverage](https://img.shields.io/coveralls/github/davidecaruso/ddd.ts/main)](https://coveralls.io/github/davidecaruso/ddd.ts?branch=main)
-![License](https://img.shields.io/github/license/davidecaruso/ddd.ts.svg)
+[![npm version](https://img.shields.io/npm/v/ts-ddd.svg)](https://www.npmjs.com/package/ts-ddd)
+[![npm downloads](https://img.shields.io/npm/dm/ts-ddd.svg)](https://www.npmjs.com/package/ts-ddd)
+[![Workflow Status](https://github.com/davidecaruso/ts-ddd/actions/workflows/main.yaml/badge.svg)](https://github.com/davidecaruso/ts-ddd/actions)
+[![Coverage](https://img.shields.io/coveralls/github/davidecaruso/ts-ddd/main)](https://coveralls.io/github/davidecaruso/ts-ddd?branch=main)
+![License](https://img.shields.io/github/license/davidecaruso/ts-ddd.svg)
 
 </p>
 
 ## Install
 
 ```bash
-$ yarn add ddd.ts
-$ npm i ddd.ts
+$ yarn add ts-ddd
+$ npm i ts-ddd
 ```
 
 ## Author

@@ -1,19 +1,19 @@
 {
-  "name": "ddd.ts",
+  "name": "ts-ddd",
   "version": "0.0.0",
   "description": "Amazing DDD tools and where to find them",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
-  "homepage": "https://github.com/davidecaruso/ddd.ts",
-  "repository": "git+https://github.com/davidecaruso/ddd.ts.git",
+  "homepage": "https://github.com/davidecaruso/ts-ddd",
+  "repository": "git+https://github.com/davidecaruso/ts-ddd.git",
   "bugs": {
-    "url": "https://github.com/davidecaruso/ddd.ts/issues"
+    "url": "https://github.com/davidecaruso/ts-ddd/issues"
   },
   "keywords": [
     "ddd",
-    "ddd.ts",
+    "ts-ddd",
     "cqrs",
     "typescript",
     "typescript-library",
