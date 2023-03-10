@@ -1,4 +1,5 @@
 # ddd.ts
+
 > Amazing **DDD** tools and where to find them
 
 <p align="center">
@@ -11,17 +12,17 @@
 
 </p>
 
-
 ## Install
+
 ```bash
 $ yarn add ddd.ts
 $ npm i ddd.ts
 ```
 
 ## Author
+
 [Davide Caruso](https://about.me/davidecaruso)
 
 ## License
+
 Licensed under [MIT](LICENSE).
-
-
