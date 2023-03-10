@@ -4,6 +4,7 @@
   "description": "Amazing DDD tools and where to find them",
   "license": "MIT",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
   "homepage": "https://github.com/davidecaruso/ddd.ts",
   "repository": "git+https://github.com/davidecaruso/ddd.ts.git",
