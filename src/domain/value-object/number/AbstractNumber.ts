@@ -44,7 +44,8 @@ export abstract class AbstractNumber extends ValueObject {
         try {
           return u instanceof this
             ? t.success(u)
-            : // @ts-ignore
+            : // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
               t.success(new this(u))
         } catch (error) {
           return t.failure(u, c)

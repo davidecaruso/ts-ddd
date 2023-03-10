@@ -39,6 +39,7 @@ export abstract class DateTime extends ValueObject {
           ? t.success(u)
           : pipe(
               t.union([tt.date, tt.DateFromISOString]).validate(u, c),
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore
               either.map(d => new this(d)),
             ),
