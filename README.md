@@ -1,4 +1,8 @@
-# ts-ddd
+<h1 align="center">
+    <a href="https://davidecaruso.github.io/ts-ddd">
+        <img src="docs/assets/logo-256x256.png" alt="logo" title="ts-ddd" />
+    </a>
+</h1>
 
 > Amazing **DDD** tools and where to find them
 
@@ -15,8 +19,8 @@
 ## Install
 
 ```bash
-$ yarn add ts-ddd
-$ npm i ts-ddd
+npm i ts-ddd
+npm i bson uuid # peer dependencies (optional)
 ```
 
 ## Author
