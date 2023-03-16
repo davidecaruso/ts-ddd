@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "author": "Davide Caruso <davide.caruso93@gmail.com>",
-  "homepage": "https://github.com/davidecaruso/ts-ddd",
+  "homepage": "https://davidecaruso.github.io/ts-ddd",
   "repository": "git+https://github.com/davidecaruso/ts-ddd.git",
   "bugs": {
     "url": "https://github.com/davidecaruso/ts-ddd/issues"
