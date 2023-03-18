@@ -3,8 +3,8 @@ import { either } from 'fp-ts'
 import { pipe } from 'fp-ts/function'
 import { presentation } from '../../../../../src'
 import { AppInstance } from '../../../app/app'
-import { PlaceOrderCommand } from '../../components/order/application/commands/PlaceOrderCommand'
-import { PlaceOrderCommandHandler } from '../../components/order/application/handlers/PlaceOrderCommandHandler'
+import { PlaceOrderCommand } from '../../components/order/application/commands/place-order.command'
+import { PlaceOrderHandler } from '../../components/order/application/handlers/place-order.handler'
 
 export default (app: AppInstance) => async (request: FastifyRequest, reply: FastifyReply) => {
   const command = pipe(
@@ -20,7 +20,7 @@ export default (app: AppInstance) => async (request: FastifyRequest, reply: Fast
   }
 
   const result = pipe(
-    await PlaceOrderCommandHandler(command.right)({
+    await PlaceOrderHandler(command.right)({
       logger: app.logger,
       eventPublisher: app.eventPublisher,
       orderRepository: app.orderRepository,

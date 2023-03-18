@@ -1,3 +1,3 @@
-import { DomainEvent, TypeOf } from './DomainEvent'
+import { DomainEvent, TypeOf } from './domain-event'
 
 export { DomainEvent, TypeOf }

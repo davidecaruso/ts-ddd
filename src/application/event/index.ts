@@ -1,4 +1,4 @@
-import { EventListener } from './EventListener'
-import { EventPublisher } from './EventPublisher'
+import { Listener } from './listener'
+import { Publisher } from './publisher'
 
-export { EventListener, EventPublisher }
+export { Listener, Publisher }

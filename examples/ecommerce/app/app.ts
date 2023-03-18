@@ -1,9 +1,9 @@
 import { EventEmitter } from 'events'
 import { Logger } from '../../../src/application/logging'
-import { InMemoryEventEmitterAdapter } from '../src/infrastructure/messaging/InMemoryEventEmitterAdapter'
-import { OrderRepository } from '../src/infrastructure/persistence/mongodb/OrderRepository'
-import { ProductRepository } from '../src/infrastructure/persistence/mongodb/ProductRepository'
-import { UserRepository } from '../src/infrastructure/persistence/mongodb/UserRepository'
+import { EventEmitterListenerPublisherAdapter } from '../src/infrastructure/messaging/event-emitter.listener-publisher.adapter'
+import { OrderRepositoryAdapter } from '../src/infrastructure/persistence/mongodb/order.repository.adapter'
+import { ProductRepositoryAdapter } from '../src/infrastructure/persistence/mongodb/product.repository.adapter'
+import { UserRepositoryAdapter } from '../src/infrastructure/persistence/mongodb/user.repository.adapter'
 
 export const bootstrap = (
   env: {
@@ -19,10 +19,10 @@ export const bootstrap = (
   logger: Logger,
 ) => ({
   logger,
-  eventPublisher: new InMemoryEventEmitterAdapter(eventEmitter, logger),
-  orderRepository: new OrderRepository(env.components.order.mongodbUri, logger),
-  userRepository: new UserRepository(env.mongodbUri, logger),
-  productRepository: new ProductRepository(env.components.order.mongodbUri, logger),
+  eventPublisher: new EventEmitterListenerPublisherAdapter(eventEmitter, logger),
+  orderRepository: new OrderRepositoryAdapter(env.components.order.mongodbUri, logger),
+  userRepository: new UserRepositoryAdapter(env.mongodbUri, logger),
+  productRepository: new ProductRepositoryAdapter(env.components.order.mongodbUri, logger),
 })
 
 export type AppInstance = ReturnType<typeof bootstrap>
