@@ -1,5 +1,5 @@
-import { either, readerTaskEither, readonlyArray, readonlyNonEmptyArray } from 'fp-ts'
-import { flow, pipe } from 'fp-ts/function'
+import { either, readerTaskEither, readonlyArray, readonlyNonEmptyArray, taskEither } from 'fp-ts'
+import { constant, flow, pipe } from 'fp-ts/function'
 import { ReaderTaskEither } from 'fp-ts/ReaderTaskEither'
 import { application } from '../../../../../../../src'
 import { UserRepository } from '../../../user/application/repositories/user.repository'
@@ -18,7 +18,7 @@ type Dependencies = {
   productRepository: ProductRepository
 }
 
-export const PlaceOrderHandler = (command: PlaceOrderCommand): ReaderTaskEither<Dependencies, Error, Order> =>
+export const PlaceOrderService = (command: PlaceOrderCommand): ReaderTaskEither<Dependencies, Error, Order> =>
   pipe(
     readerTaskEither.ask<Dependencies>(),
     readerTaskEither.chainW(({ userRepository, productRepository, orderRepository, eventPublisher, logger }) =>
@@ -67,7 +67,14 @@ export const PlaceOrderHandler = (command: PlaceOrderCommand): ReaderTaskEither<
         ),
         readerTaskEither.bind('order', ({ products, user }) => readerTaskEither.of(Order.create(products, user))),
         readerTaskEither.chainTaskEitherK(({ order, user }) => orderRepository.upsertOne(order)),
-        readerTaskEither.chainFirst(order => readerTaskEither.fromTaskEither(eventPublisher.publish(order.events))),
+        readerTaskEither.chainFirst(order =>
+          readerTaskEither.fromTaskEither(
+            taskEither.tryCatch(constant(eventPublisher.publish(order.events)), e => {
+              logger?.error(e)
+              return new Error(`Unable to publish order creation event for ID "${order.id.toString()}".`)
+            }),
+          ),
+        ),
       ),
     ),
   )

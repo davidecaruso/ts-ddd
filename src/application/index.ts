@@ -1,7 +1,7 @@
 import * as dto from './dto'
 import * as event from './event'
-import * as handler from './handler'
 import * as logging from './logging'
-import * as persistence from './persistence'
+import * as repository from './repository'
+import * as service from './service'
 
-export { dto, event, handler, logging, persistence }
+export { dto, event, logging, repository, service }

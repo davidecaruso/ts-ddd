@@ -37,7 +37,7 @@ An object which is responsible for carry data between processes.
 - **Command**: to be used for creation, editing o deleting flows.
 - **Query**: to be used for querying the data.
 
-#### Handler
+#### Service
 
 - **Command**: to be used for handling creation, editing o deleting flows.
 - **Query**: to be used for handling querying the data.

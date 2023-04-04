@@ -4,13 +4,13 @@ import { pipe } from 'fp-ts/function'
 import { presentation } from '../../../../../src'
 import { AppInstance } from '../../../app/app'
 import { PlaceOrderCommand } from '../../components/order/application/commands/place-order.command'
-import { PlaceOrderHandler } from '../../components/order/application/handlers/place-order.handler'
+import { PlaceOrderService } from '../../components/order/application/services/place-order.service'
 
 export default (app: AppInstance) => async (request: FastifyRequest, reply: FastifyReply) => {
   const command = pipe(
     request.body,
     PlaceOrderCommand.decode,
-    either.mapLeft(e => new presentation.error.BadRequestError('Some date is invalid', e.toString())),
+    either.mapLeft(e => new presentation.http.error.BadRequestError('Some date is invalid', e.toString())),
   )
 
   if (either.isLeft(command)) {
@@ -20,7 +20,7 @@ export default (app: AppInstance) => async (request: FastifyRequest, reply: Fast
   }
 
   const result = pipe(
-    await PlaceOrderHandler(command.right)({
+    await PlaceOrderService(command.right)({
       logger: app.logger,
       eventPublisher: app.eventPublisher,
       orderRepository: app.orderRepository,
@@ -28,7 +28,7 @@ export default (app: AppInstance) => async (request: FastifyRequest, reply: Fast
       userRepository: app.userRepository,
     })(),
     either.mapLeft(
-      e => new presentation.error.InternalServerError('There was an error during order creation', e.toString()),
+      e => new presentation.http.error.InternalServerError('There was an error during order creation', e.toString()),
     ),
   )
 

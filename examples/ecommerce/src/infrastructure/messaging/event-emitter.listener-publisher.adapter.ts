@@ -1,7 +1,6 @@
 import { EventEmitter } from 'events'
 import { either, ioEither, task, taskEither } from 'fp-ts'
 import { constant, constVoid, pipe } from 'fp-ts/function'
-import { TaskEither } from 'fp-ts/TaskEither'
 import * as t from 'io-ts'
 import { Listener, Publisher } from '../../../../../src/application/event'
 import { Logger } from '../../../../../src/application/logging'
@@ -12,18 +11,18 @@ import { Id } from '../../../../../src/domain/value-object'
 export class EventEmitterListenerPublisherAdapter implements Publisher, Listener {
   constructor(private emitter: EventEmitter, protected logger?: Logger) {}
 
-  listen<E extends DomainEvent<Id, AggregateRoot<Id>>>(t: TypeOf<E>, callback: (e: E) => void) {
+  async listen<E extends DomainEvent<Id, AggregateRoot<Id>>>(t: TypeOf<E>, callback: (e: E) => void) {
     return pipe(
       either.tryCatch(
         () => this.emitter.on(t, callback),
         err => new Error(`There was an error while listening "${t}" event: ${JSON.stringify(err)}`),
       ),
-      either.map(constVoid),
+      either.match(either.throwError, constVoid),
     )
   }
 
-  publish<E extends DomainEvent<Id, AggregateRoot<Id>>>(e: ReadonlyArray<E> | E): TaskEither<Error, void> {
-    return pipe(
+  async publish<E extends DomainEvent<Id, AggregateRoot<Id>>>(e: ReadonlyArray<E> | E) {
+    return await pipe(
       t.readonlyArray(t.unknown).is(e) ? [...e] : [e],
       taskEither.traverseArray(event =>
         pipe(
@@ -49,7 +48,7 @@ export class EventEmitterListenerPublisherAdapter implements Publisher, Listener
           ),
         ),
       ),
-      taskEither.map(constVoid),
-    )
+      taskEither.match(either.throwError, constVoid),
+    )()
   }
 }

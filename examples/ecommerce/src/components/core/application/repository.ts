@@ -4,7 +4,7 @@ import { application, domain } from '../../../../../../src'
 import { IdOf } from '../../../../../../src/domain/entity'
 
 export abstract class Repository<E extends domain.entity.Entity<domain.valueObject.Id>>
-  implements application.persistence.Repository<E>
+  implements application.repository.Repository<E>
 {
   constructor(protected logger?: application.logging.Logger) {}
 

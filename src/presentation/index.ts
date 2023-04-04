@@ -1,3 +1,3 @@
-import * as error from './error'
+import * as http from './http'
 
-export { error }
+export { http }

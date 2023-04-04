@@ -27,7 +27,7 @@ import {
   UnsupportedMediaTypeError,
   UpgradeRequiredError,
   UriTooLongError,
-} from '../'
+} from './index'
 
 describe('HttpError', () => {
   describe('ClientError', () => {
