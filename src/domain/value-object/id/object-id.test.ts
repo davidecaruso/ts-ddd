@@ -1,8 +1,7 @@
 import { ObjectID } from 'bson'
 import { either } from 'fp-ts'
 import { InvalidObjectIdGivenError } from '../../error'
-import { IntegerId } from './integer-id'
-import { ObjectId } from './object-id'
+import { IntegerId, ObjectId } from '../index'
 
 class FooId extends ObjectId {
   readonly _type = 'foo-id'
@@ -14,6 +13,17 @@ class FooId extends ObjectId {
 
 describe('ObjectId', () => {
   describe('constructor', () => {
+    describe('with FooId instance', () => {
+      it('should return a Foo instance', () => {
+        const oid = new ObjectID()
+        const sut = new FooId(new FooId(oid))
+
+        expect(sut._type).toStrictEqual('foo-id')
+        expect(sut.toRaw()).toStrictEqual(oid)
+        expect(sut.toString()).toStrictEqual(oid.toString())
+      })
+    })
+
     describe('with object ID input argument', () => {
       it('should return an FooId instance', () => {
         const oid = new ObjectID()

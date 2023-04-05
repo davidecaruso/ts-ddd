@@ -24,10 +24,6 @@ export abstract class AbstractNumber extends ValueObject {
     return this._value
   }
 
-  protected set value(n) {
-    this._value = n
-  }
-
   protected static codec() {
     return new t.Type(
       this.name ?? AbstractNumber.name,

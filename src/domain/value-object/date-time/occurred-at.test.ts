@@ -1,9 +1,18 @@
 import { either } from 'fp-ts'
-import { OccurredAt } from './occurred-at'
-import { UpdatedAt } from './updated-at'
+import { OccurredAt, UpdatedAt } from '../index'
 
 describe('OccurredAt', () => {
   describe('constructor', () => {
+    describe('with CreatedAt instance', () => {
+      it('should return a Foo instance', () => {
+        const date = new Date(1979, 9, 12, 1)
+        const sut = new OccurredAt(new OccurredAt(date))
+
+        expect(sut._type).toStrictEqual('occurred-at')
+        expect(sut.toDateString()).toStrictEqual(date.toISOString().substring(0, 10))
+      })
+    })
+
     describe('without input argument', () => {
       it('should return a OccurredAt instance within current date', () => {
         const sut = new OccurredAt()

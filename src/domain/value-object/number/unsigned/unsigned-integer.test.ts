@@ -1,7 +1,6 @@
 import { either } from 'fp-ts'
 import { InvalidNumberGivenError } from '../../../error'
-import { UnsignedDecimal } from './unsigned-decimal'
-import { UnsignedInteger } from './unsigned-integer'
+import { UnsignedDecimal, UnsignedInteger } from '../../index'
 
 class Foo extends UnsignedInteger {
   readonly _type = 'foo'
@@ -13,6 +12,15 @@ class Foo extends UnsignedInteger {
 
 describe('UnsignedInteger', () => {
   describe('constructor', () => {
+    describe('with Foo instance', () => {
+      it('should return a Foo instance', () => {
+        const sut = new Foo(new Foo(42))
+
+        expect(sut._type).toStrictEqual('foo')
+        expect(sut.value).toStrictEqual(42)
+      })
+    })
+
     describe('with number input argument', () => {
       describe('with positive integer input argument', () => {
         it.each([0, 42, 100])('should return a Foo instance', value => {

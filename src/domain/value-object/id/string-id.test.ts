@@ -1,7 +1,6 @@
 import { either } from 'fp-ts'
 import { InvalidStringIdGivenError } from '../../error'
-import { IntegerId } from './integer-id'
-import { StringId } from './string-id'
+import { IntegerId, StringId } from '../index'
 
 class FooId extends StringId {
   readonly _type = 'foo-id'
@@ -13,6 +12,16 @@ class FooId extends StringId {
 
 describe('StringId', () => {
   describe('constructor', () => {
+    describe('with FooId instance', () => {
+      it('should return a Foo instance', () => {
+        const sut = new FooId(new FooId('foo'))
+
+        expect(sut._type).toStrictEqual('foo-id')
+        expect(sut.toRaw()).toStrictEqual('foo')
+        expect(sut.toString()).toStrictEqual('foo')
+      })
+    })
+
     describe('with valid input argument', () => {
       it('should return an FooId instance', () => {
         const sut = new FooId('foo')

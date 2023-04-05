@@ -1,7 +1,6 @@
 import { either } from 'fp-ts'
 import { InvalidNumberGivenError } from '../../../error'
-import { UnsignedDecimal } from './unsigned-decimal'
-import { UnsignedInteger } from './unsigned-integer'
+import { UnsignedDecimal, UnsignedInteger } from '../../index'
 
 const error = new InvalidNumberGivenError('The value must be greater than or equal to 0')
 
@@ -15,6 +14,15 @@ class Foo extends UnsignedDecimal {
 
 describe('UnsignedDecimal', () => {
   describe('constructor', () => {
+    describe('with Foo instance', () => {
+      it('should return a Foo instance', () => {
+        const sut = new Foo(new Foo(42))
+
+        expect(sut._type).toStrictEqual('foo')
+        expect(sut.value).toStrictEqual(42)
+      })
+    })
+
     describe('with number input argument', () => {
       describe('with integer input argument', () => {
         describe('with positive integer input argument', () => {

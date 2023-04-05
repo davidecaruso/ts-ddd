@@ -1,8 +1,7 @@
 import { either } from 'fp-ts'
 import { v4 } from 'uuid'
 import { InvalidUuidGivenError } from '../../error'
-import { IntegerId } from './integer-id'
-import { Uuid } from './uuid'
+import { IntegerId, Uuid } from '../index'
 
 class FooId extends Uuid {
   readonly _type = 'foo-id'
@@ -14,6 +13,17 @@ class FooId extends Uuid {
 
 describe('Uuid', () => {
   describe('constructor', () => {
+    describe('with FooId instance', () => {
+      it('should return a Foo instance', () => {
+        const uuid = v4()
+        const sut = new FooId(new FooId(uuid))
+
+        expect(sut._type).toStrictEqual('foo-id')
+        expect(sut.toRaw()).toStrictEqual(uuid)
+        expect(sut.toString()).toStrictEqual(uuid.toString())
+      })
+    })
+
     describe('with uuid input argument', () => {
       it('should return an FooId instance', () => {
         const uuid = v4()

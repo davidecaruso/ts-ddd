@@ -1,7 +1,6 @@
 import { either } from 'fp-ts'
 import { InvalidNumberGivenError } from '../../../error'
-import { Decimal } from './decimal'
-import { Integer } from './integer'
+import { Decimal, Integer } from '../../index'
 
 class Foo extends Integer {
   readonly _type = 'foo'
@@ -13,6 +12,15 @@ class Foo extends Integer {
 
 describe('Integer', () => {
   describe('constructor', () => {
+    describe('with Foo instance', () => {
+      it('should return a Foo instance', () => {
+        const sut = new Foo(new Foo(42))
+
+        expect(sut._type).toStrictEqual('foo')
+        expect(sut.value).toStrictEqual(42)
+      })
+    })
+
     describe('with number input argument', () => {
       describe('with positive integer input argument', () => {
         it.each([0, 42, 100])('should return a Foo instance', value => {

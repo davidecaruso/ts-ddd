@@ -1,7 +1,6 @@
 import { either } from 'fp-ts'
 import { InvalidIntegerIdGivenError } from '../../error'
-import { IntegerId } from './integer-id'
-import { ObjectId } from './object-id'
+import { IntegerId, ObjectId } from '../index'
 
 class FooId extends IntegerId {
   readonly _type = 'foo-id'
@@ -13,6 +12,16 @@ class FooId extends IntegerId {
 
 describe('IntegerId', () => {
   describe('constructor', () => {
+    describe('with FooId instance', () => {
+      it('should return a Foo instance', () => {
+        const sut = new FooId(new FooId(42))
+
+        expect(sut._type).toStrictEqual('foo-id')
+        expect(sut.toRaw()).toStrictEqual(42)
+        expect(sut.toString()).toStrictEqual('42')
+      })
+    })
+
     describe('with integer input argument', () => {
       it('should return an FooId instance', () => {
         const sut = new FooId(42)

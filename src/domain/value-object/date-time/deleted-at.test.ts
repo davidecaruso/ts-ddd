@@ -1,9 +1,18 @@
 import { either } from 'fp-ts'
-import { DeletedAt } from './deleted-at'
-import { UpdatedAt } from './updated-at'
+import { DeletedAt, UpdatedAt } from '../index'
 
 describe('DeletedAt', () => {
   describe('constructor', () => {
+    describe('with DeletedAt instance', () => {
+      it('should return a Foo instance', () => {
+        const date = new Date(1979, 9, 12, 1)
+        const sut = new DeletedAt(new DeletedAt(date))
+
+        expect(sut._type).toStrictEqual('deleted-at')
+        expect(sut.toDateString()).toStrictEqual(date.toISOString().substring(0, 10))
+      })
+    })
+
     describe('without input argument', () => {
       it('should return a DeletedAt instance within current date', () => {
         const sut = new DeletedAt()
