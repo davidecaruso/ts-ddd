@@ -6,11 +6,11 @@ class EventId extends ObjectId {
   readonly _type = 'event-id'
 }
 
-class FooCreated extends DomainEvent<EventId, Foo> {
+class FooCreated extends DomainEvent<Foo> {
   readonly _type = 'foo-created'
 }
 
-class FooDeleted extends DomainEvent<EventId, Foo> {
+class FooDeleted extends DomainEvent<Foo> {
   readonly _type = 'foo-deleted'
 }
 

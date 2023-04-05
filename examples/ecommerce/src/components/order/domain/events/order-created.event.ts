@@ -3,7 +3,7 @@ import { Order } from '../entities/order'
 import { EventId } from '../value-objects/event-id'
 import { OrderId } from '../value-objects/order-id'
 
-export class OrderCreatedEvent extends domain.event.DomainEvent<EventId, Order> {
+export class OrderCreatedEvent extends domain.event.DomainEvent<Order> {
   readonly _type = 'order-created'
 
   constructor(readonly _aggregateId: OrderId, readonly id: EventId = new EventId()) {

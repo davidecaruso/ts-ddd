@@ -1,6 +1,6 @@
 import { Id } from '../value-object'
 
-export abstract class Entity<I extends Id> {
+export abstract class Entity<I extends Id = Id> {
   readonly _type?: string = undefined
 
   constructor(readonly id: I) {}
@@ -10,6 +10,6 @@ export abstract class Entity<I extends Id> {
   }
 }
 
-export type TypeOf<E extends Entity<Id>> = E['_type']
+export type TypeOf<E extends Entity> = E['_type']
 
-export type IdOf<E extends Entity<Id>> = E['id']
+export type IdOf<E extends Entity> = E['id']

@@ -6,12 +6,11 @@ import { Listener, Publisher } from '../../../../../src/application/event'
 import { Logger } from '../../../../../src/application/logging'
 import { AggregateRoot } from '../../../../../src/domain/entity'
 import { DomainEvent, TypeOf } from '../../../../../src/domain/event'
-import { Id } from '../../../../../src/domain/value-object'
 
 export class EventEmitterListenerPublisherAdapter implements Publisher, Listener {
   constructor(private emitter: EventEmitter, protected logger?: Logger) {}
 
-  async listen<E extends DomainEvent<Id, AggregateRoot<Id>>>(t: TypeOf<E>, callback: (e: E) => void) {
+  async listen<E extends DomainEvent<AggregateRoot>>(t: TypeOf<E>, callback: (e: E) => void) {
     return pipe(
       either.tryCatch(
         () => this.emitter.on(t, callback),
@@ -21,7 +20,7 @@ export class EventEmitterListenerPublisherAdapter implements Publisher, Listener
     )
   }
 
-  async publish<E extends DomainEvent<Id, AggregateRoot<Id>>>(e: ReadonlyArray<E> | E) {
+  async publish<E extends DomainEvent<AggregateRoot>>(e: ReadonlyArray<E> | E) {
     return await pipe(
       t.readonlyArray(t.unknown).is(e) ? [...e] : [e],
       taskEither.traverseArray(event =>

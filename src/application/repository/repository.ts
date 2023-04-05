@@ -1,6 +1,5 @@
 import { Entity, TypeOf } from '../../domain/entity'
-import { Id } from '../../domain/value-object'
 
-export interface Repository<E extends Entity<Id>> {}
+export interface Repository<E extends Entity> {}
 
-export type EntityOf<E extends Entity<Id>, R extends Repository<E>> = TypeOf<E>
+export type EntityOf<E extends Entity, R extends Repository<E>> = TypeOf<E>

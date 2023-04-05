@@ -4,7 +4,7 @@ import { ProductId } from '../value-objects/product-id'
 import { ProductName } from '../value-objects/product-name'
 import { ProductPrice } from '../value-objects/product-price'
 
-export class Product extends domain.entity.Entity<ProductId> {
+export class Product extends domain.entity.Entity {
   readonly _type = 'product'
   readonly updatedAt: domain.valueObject.UpdatedAt
 

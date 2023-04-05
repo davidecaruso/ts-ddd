@@ -7,7 +7,7 @@ import { Repository } from '../../../components/core/application/repository'
 
 export abstract class MongoDbRepositoryAdapter<E extends domain.entity.Entity<domain.valueObject.Id>>
   extends Repository<E>
-  implements application.persistence.Repository<E>
+  implements application.repository.Repository<E>
 {
   protected abstract collectionName: string
 
