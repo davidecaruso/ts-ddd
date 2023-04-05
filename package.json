@@ -1,6 +1,6 @@
 {
   "name": "ts-ddd",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Amazing DDD tools and where to find them",
   "license": "MIT",
   "main": "lib/index.js",
