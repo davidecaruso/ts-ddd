@@ -18,7 +18,8 @@
     "typescript",
     "typescript-library",
     "ddd-architecture",
-    "hexagonal-architecture"
+    "hexagonal-architecture",
+    "typescript-ddd"
   ],
   "scripts": {
     "build": "tsc --build",
